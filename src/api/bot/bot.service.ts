@@ -17,18 +17,18 @@ export class BotService {
   @Action('uz')
   async setLangUz(@Ctx() ctx: ContextType) {
     ctx.session.lang = 'uz';
-    ctx.editMessageText(askName[ctx.session.lang]);
+    ctx.scene.enter('Register');
   }
 
   @Action('ru')
   async setLangRu(@Ctx() ctx: ContextType) {
     ctx.session.lang = 'ru';
-    ctx.editMessageText(askName[ctx.session.lang]);
+    ctx.scene.enter('Register');
   }
 
   @Action('en')
   async setLangEn(@Ctx() ctx: ContextType) {
     ctx.session.lang = 'en';
-    ctx.editMessageText(askName[ctx.session.lang]);
+    ctx.scene.enter('Register');
   }
 }
