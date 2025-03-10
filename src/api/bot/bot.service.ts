@@ -1,7 +1,7 @@
 import { ContextType } from 'src/common';
-import { Update, Ctx, Command, Action } from 'nestjs-telegraf';
+import { Update, Ctx, Command, Action, On } from 'nestjs-telegraf';
 import { selectLangKeys } from 'src/common/constants/general/keyboard';
-import { startMessage } from 'src/common/constants/general/message';
+import { askName, startMessage } from 'src/common/constants/general/message';
 
 @Update()
 export class BotService {
@@ -17,15 +17,18 @@ export class BotService {
   @Action('uz')
   async setLangUz(@Ctx() ctx: ContextType) {
     ctx.session.lang = 'uz';
+    ctx.editMessageText(askName[ctx.session.lang]);
   }
 
   @Action('ru')
   async setLangRu(@Ctx() ctx: ContextType) {
     ctx.session.lang = 'ru';
+    ctx.editMessageText(askName[ctx.session.lang]);
   }
 
   @Action('en')
   async setLangEn(@Ctx() ctx: ContextType) {
     ctx.session.lang = 'en';
+    ctx.editMessageText(askName[ctx.session.lang]);
   }
 }
