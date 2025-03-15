@@ -1,6 +1,5 @@
 import { Action, Ctx, On, Scene, SceneEnter } from 'nestjs-telegraf';
 import { ContextType } from 'src/common';
-import { usersMenuKeyboard } from 'src/common/constants/admin/keyboard';
 import { phoneNumberKeys } from 'src/common/constants/general/keyboard';
 import {
   askName,
@@ -35,6 +34,10 @@ export class AskPhoneNumber {
   @On('contact')
   async textHandler(ctx: ContextType) {
     const phone_number = (ctx.update as any).message.contact.phone_number;
+    const sentMessage = await ctx.reply('⌛️', {
+      reply_markup: { remove_keyboard: true },
+    });
+    await ctx.deleteMessage(sentMessage.message_id);
     ctx.reply(mainMessage[ctx.session.lang], {
       reply_markup: usersMenuKeys[ctx.session.lang],
     });
