@@ -6,6 +6,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AdminEntity, UserEntity } from 'src/core';
 import { UserModule } from '../users/users.module';
 
+
 @Module({
   imports: [
     TypeOrmModule.forFeature([UserEntity, AdminEntity]),
