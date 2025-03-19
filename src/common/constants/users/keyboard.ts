@@ -5,7 +5,7 @@ export const usersMenuKeys: Record<string, InlineKeyboardMarkup> = {
   uz: {
     inline_keyboard: [
       [Markup.button.callback(`📢 E'lon berish`, 'postAd')],
-      [Markup.button.callback(`📜 E'lonlarni ko‘rish`, 'viewAds')],
+      [Markup.button.url(`📜 E'lonlarni ko‘rish`, 'https://t.me/TechBoz0r')],
       [Markup.button.callback(`📞 Admin bilan bog‘lanish`, 'contactAdmin')],
       [Markup.button.callback('⚙️ Sozlamalar', 'settings')],
     ],
@@ -13,7 +13,7 @@ export const usersMenuKeys: Record<string, InlineKeyboardMarkup> = {
   en: {
     inline_keyboard: [
       [Markup.button.callback('📢 Post an Ad', 'postAd')],
-      [Markup.button.callback('📜 View Ads', 'viewAds')],
+      [Markup.button.url('📜 View Ads', 'https://t.me/TechBoz0r')],
       [Markup.button.callback('📞 Contact Admin', 'contactAdmin')],
       [Markup.button.callback('⚙️ Settings', 'settings')],
     ],
@@ -21,9 +21,68 @@ export const usersMenuKeys: Record<string, InlineKeyboardMarkup> = {
   ru: {
     inline_keyboard: [
       [Markup.button.callback('📢 Разместить объявление', 'postAd')],
-      [Markup.button.callback('📜 Просмотр объявлений', 'viewAds')],
+      [Markup.button.url('📜 Просмотр объявлений', 'https://t.me/TechBoz0r')],
       [Markup.button.callback('📞 Связаться с админом', 'contactAdmin')],
       [Markup.button.callback('⚙️ Настройки', 'settings')],
+    ],
+  },
+};
+export const adsCategoryKeys: Record<string, InlineKeyboardMarkup> = {
+  uz: {
+    inline_keyboard: [
+      [
+        Markup.button.callback('📱 Telefonlar', 'phones'),
+        Markup.button.callback('💻 Kompyuterlar', 'pc'),
+      ],
+      [Markup.button.callback('Orqaga 🔙', 'backMenu')],
+    ],
+  },
+  en: {
+    inline_keyboard: [
+      [
+        Markup.button.callback('📱 Telephones', 'phones'),
+        Markup.button.callback('💻 Computers', 'pc'),
+      ],
+      [Markup.button.callback('Back 🔙', 'backMenu')],
+    ],
+  },
+  ru: {
+    inline_keyboard: [
+      [
+        Markup.button.callback('📱 Телефоны', 'phones'),
+        Markup.button.callback('💻 Компьютеры', 'pc'),
+      ],
+      [Markup.button.callback('Назад 🔙', 'backMenu')],
+    ],
+  },
+};
+
+export const telephoneTypeKeys: Record<string, InlineKeyboardMarkup> = {
+  uz: {
+    inline_keyboard: [
+      [
+        Markup.button.callback('iPhonelar uchun', 'iPhone'),
+        Markup.button.callback('Android uchun', 'Android'),
+      ],
+      [Markup.button.callback('Orqaga 🔙', 'backAdsCategory')],
+    ],
+  },
+  en: {
+    inline_keyboard: [
+      [
+        Markup.button.callback('iPhonelar uchun', 'iPhone'),
+        Markup.button.callback('Android uchun', 'Android'),
+      ],
+      [Markup.button.callback('Back 🔙', 'backAdsCategory')],
+    ],
+  },
+  ru: {
+    inline_keyboard: [
+      [
+        Markup.button.callback('iPhonelar uchun', 'iPhone'),
+        Markup.button.callback('Android uchun', 'Android'),
+      ],
+      [Markup.button.callback('Назад 🔙', 'backAdsCategory')],
     ],
   },
 };
