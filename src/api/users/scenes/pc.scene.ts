@@ -1,8 +1,8 @@
 import { Scene, SceneEnter } from 'nestjs-telegraf';
 import { ContextType } from 'src/common';
 
-@Scene('iPhoneDevice')
-export class iPhonePostScene {
+@Scene('PCDevice')
+export class PcPostScene {
   constructor() {}
   @SceneEnter()
   async onEnter(ctx: ContextType) {

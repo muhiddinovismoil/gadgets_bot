@@ -18,14 +18,12 @@ export class PcEntity extends BaseEntity {
   @Column({ type: 'varchar' })
   phone_number: string;
 
-  @Column({ type: "bigint" })
+  @Column({ type: 'bigint' })
   processor: number;
 
-  @Column({type:"bigint"})
+  @Column({ type: 'bigint' })
   mother_board: number;
 
-  @Column({type:"bigint"})
-
+  @Column({ type: 'bigint' })
   new_column: number;
-
 }
