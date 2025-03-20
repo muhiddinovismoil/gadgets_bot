@@ -46,7 +46,7 @@ export class ActionsService {
   }
   @Action('iPhone')
   async oniPhone(@Ctx() ctx: ContextType) {
-    // ctx.scene.enter();
+    ctx.scene.enter('iPhoneDevice');
   }
   @Action('Android')
   async onAndroid(@Ctx() ctx: ContextType) {
