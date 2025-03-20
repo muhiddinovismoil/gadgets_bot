@@ -61,7 +61,7 @@ export const telephoneTypeKeys: Record<string, InlineKeyboardMarkup> = {
   uz: {
     inline_keyboard: [
       [
-        Markup.button.callback('iPhonelar uchun', 'iPhone'),
+        Markup.button.callback('iPhone uchun', 'iPhone'),
         Markup.button.callback('Android uchun', 'Android'),
       ],
       [Markup.button.callback('Orqaga 🔙', 'backAdsCategory')],
@@ -70,8 +70,8 @@ export const telephoneTypeKeys: Record<string, InlineKeyboardMarkup> = {
   en: {
     inline_keyboard: [
       [
-        Markup.button.callback('iPhonelar uchun', 'iPhone'),
-        Markup.button.callback('Android uchun', 'Android'),
+        Markup.button.callback('For iPhone', 'iPhone'),
+        Markup.button.callback('For Android', 'Android'),
       ],
       [Markup.button.callback('Back 🔙', 'backAdsCategory')],
     ],
@@ -79,8 +79,8 @@ export const telephoneTypeKeys: Record<string, InlineKeyboardMarkup> = {
   ru: {
     inline_keyboard: [
       [
-        Markup.button.callback('iPhonelar uchun', 'iPhone'),
-        Markup.button.callback('Android uchun', 'Android'),
+        Markup.button.callback('Для iPhone', 'iPhone'),
+        Markup.button.callback('Для Android', 'Android'),
       ],
       [Markup.button.callback('Назад 🔙', 'backAdsCategory')],
     ],
