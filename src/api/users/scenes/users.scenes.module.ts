@@ -1,28 +1,10 @@
 import { Module } from '@nestjs/common';
+import { UserEntity } from 'src/core';
+import { TypeOrmModule } from '@nestjs/typeorm';
 import { AskPhoneNumber, RegisterScene } from './register.scene';
 import { AndroidPostScene } from './android.scene';
-import {
-  iPhonePostScene,
-  AskiPhoneMemoryScene,
-  AskiPhonePrice,
-  AskPhoneNumberForPost,
-  AskiPhoneBattaryCondition,
-  AskiPhoneDocumentsValid,
-  AskiPhoneImages,
-  AskiPhoneRegion,
-  AskIsExchangeValid,
-  AskisDeliveryValid,
-} from './iphone.scene';
-import {
-  AskPhoneNumberPC,
-  AskPricePcScene,
-  AskProcessorPc,
-  AskStoreNamePc,
-  AskTypePcScene,
-  PcPostScene,
-} from './pc.scene';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { UserEntity } from 'src/core';
+import * as iPhone from './iphone.scene';
+import * as PC from './pc.scene';
 @Module({
   imports: [TypeOrmModule.forFeature([UserEntity])],
   providers: [
@@ -36,26 +18,26 @@ import { UserEntity } from 'src/core';
 
     // ---------------------------------------------------------------------
     // iPhone Scenes
-    iPhonePostScene,
-    AskiPhonePrice,
-    AskiPhoneMemoryScene,
-    AskPhoneNumberForPost,
-    AskiPhoneDocumentsValid,
-    AskiPhoneBattaryCondition,
-    AskiPhoneImages,
-    AskiPhoneRegion,
-    AskIsExchangeValid,
-    AskisDeliveryValid,
+    iPhone.iPhonePostScene,
+    iPhone.AskiPhonePrice,
+    iPhone.AskiPhoneMemoryScene,
+    iPhone.AskPhoneNumberForPost,
+    iPhone.AskiPhoneDocumentsValid,
+    iPhone.AskiPhoneBattaryCondition,
+    iPhone.AskiPhoneImages,
+    iPhone.AskiPhoneRegion,
+    iPhone.AskIsExchangeValid,
+    iPhone.AskisDeliveryValid,
     // ---------------------------------------------------------------------
 
     // ---------------------------------------------------------------------
     // Pc Scenes
-    PcPostScene,
-    AskTypePcScene,
-    AskPricePcScene,
-    AskStoreNamePc,
-    AskProcessorPc,
-    AskPhoneNumberPC,
+    PC.PcPostScene,
+    PC.AskTypePcScene,
+    PC.AskPricePcScene,
+    PC.AskStoreNamePc,
+    PC.AskProcessorPc,
+    PC.AskPhoneNumberPC,
     // ---------------------------------------------------------------------
   ],
 })
