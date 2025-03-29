@@ -1,3 +1,5 @@
+import e from 'express';
+
 export const askModelPhoneMsg = {
   uz: `Telefon modelini kiriting`,
   en: `Enter the phone model`,
@@ -18,6 +20,46 @@ export const askPhoneNumber = {
   en: `Enter a phone number`,
   ru: `Введите номер телефона`,
 };
+export const askIsDeliveryValid = {
+  uz: `Yetkazib berish bormi ?`,
+  en: `Is there delivery ?`,
+  ru: `Есть ли доставка ?`,
+};
+export const askExchange = {
+  uz: `Telefonni almashtira olasizmi?`,
+  en: `Can you exchange the phone?`,
+  ru: `Можно ли обменять телефон?`,
+};
+export const askIsDocumentsValid = {
+  uz: 'Telefonni document va karobkasi bormi ?',
+  en: 'Does the phone have documents and box?',
+  ru: 'Есть ли на телефоне документы и коробка?',
+};
+export const askRegionOfPhone = {
+  uz: `Telefoningizni regionini kiriting`,
+  en: 'Enter the region of your phone',
+  ru: 'Введите регион вашего телефона',
+};
+export const askConditionOfBattary = {
+  uz: `Telefoningizni batareyasi holatini kiriting`,
+  en: 'Enter the condition of your phone battery',
+  ru: 'Введите состояние батареи вашего телефона',
+};
+export const askConditionOfPhone = {
+  uz: `Telefoningizni xolatini kiriting`,
+  en: 'Enter the condition of your phone',
+  ru: 'Введите состояние вашего телефона',
+};
+export const askPhoneImages = {
+  uz: `Telefoningizni rasmini jo'nating`,
+  en: 'Send your phone pictures',
+  ru: 'Отправьте фотографии вашего телефона',
+};
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// ******************************************************** Incorrect inputs message ********************************************************
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 export const incorrectFormatPhoneModel = {
   uz: `❌ Telefon modelini noto‘g‘ri kiritdingiz. iPhone bilan boshlanishi kerak! Masalan: iPhone 16 yoki iPhone X.`,
   en: `❌ You have entered an incorrect phone model. It should start with "iPhone"! Example: iPhone 16 or iPhone X.`,
@@ -38,4 +80,15 @@ export const incorrectPricePhoneMsg = {
   uz: `❌ Telefon narxini to'gri formatda kiriting misol uchun 160 yoki 1750000`,
   en: `❌ Enter the phone price in the correct format, for example 160 or 1750000`,
   ru: `❌ Введите цену телефона в правильном формате, например 160 или 1750000.`,
+};
+
+export const incorrectBattaryPhoneMsg = {
+  uz: `❌ Telefon batareyasi holatini noto'g'ri kiritdingiz. Masalan: 100%`,
+  en: `❌ You have entered the phone battery condition incorrectly. For example: 100%`,
+  ru: `❌ Вы ввели состояние батареи телефона неправильно. Например: 100%`,
+};
+export const incorrectRegionPhoneMsg = {
+  uz: `❌ Telefon regionini noto'g'ri kiritdingiz. Masalan: LL/A`,
+  en: `❌ You have entered the phone region incorrectly. For example: LL/A`,
+  ru: `❌ Вы ввели регион телефона неправильно. Например: LL/A`,
 };
