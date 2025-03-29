@@ -56,8 +56,4 @@ export class AskPhoneNumber {
       reply_markup: usersMenuKeys[ctx.session.lang],
     });
   }
-
 }
-
-
-

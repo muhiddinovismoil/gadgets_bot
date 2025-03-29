@@ -9,12 +9,12 @@ import {
   incorrectFormatPhoneModel,
   incorrectPhoneNumber,
   incorrectPricePhoneMsg,
-} from 'src/common/constants/users/phone/message';
+} from 'src/common/constants/users/iphones/message';
 import {
   iPhoneMemoryRegex,
   iPhoneModelRegex,
   iPhonePriceRegex,
-} from 'src/common/constants/users/phone/regex/regex';
+} from 'src/common/constants/users/iphones/regex/regex';
 import { uzbPhoneRegex } from 'src/common/constants/general/regex';
 
 @Scene('iPhoneDevice')

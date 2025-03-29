@@ -12,6 +12,6 @@ export class LaptpScene {
   @On('text')
   async textHandler(ctx: ContextType) {
     const name = (ctx.update as any).message.text;
-    ctx.reply("salom")
+    ctx.reply('salom');
   }
 }
