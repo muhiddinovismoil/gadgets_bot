@@ -9,54 +9,66 @@ import {
 @Scene('PCDevice')
 export class PcPostScene {
   constructor() {}
+
   @SceneEnter()
-  async onEnter(ctx: ContextType) {
+  async onEnter(ctx: ContextType) { 
     const lang = ctx.session.lang;
-    const message = MainMessage[lang];
-    await ctx.reply(message, {
-      reply_markup: PcKeyboard[ctx.session.lang],
+    await ctx.reply(MainMessage[lang], {
+      reply_markup: PcKeyboard[lang],
     });
   }
 
-
   @On('text')
   async textHandler(ctx: ContextType) {
-    const text = (ctx.update as any).message.text;
-    ctx.scene.enter(text);
-    
+    if (!( ctx.update as any).session.step ) return;
+
+    const text = ( ctx.update as any).message.text ;
+
+    switch (( ctx.update as any).session.step ) {
+      case 'type':
+        ( ctx.update as any).session.step  = text;
+        ( ctx.update as any).session.step  = 'price';
+        await ctx.reply(GreetingMessages.price[ctx.session.lang]);
+        break;
+
+      case 'price':
+        ( ctx.update as any).session.step  = text;
+        ( ctx.update as any).session.step = 'store_name';
+        await ctx.reply(GreetingMessages.store_name[ctx.session.lang]);
+        break;
+
+      case 'store_name':
+        ( ctx.update as any).session.step  = text;
+        ( ctx.update as any).session.step = 'phone_number';
+        await ctx.reply(GreetingMessages.phone_number[ctx.session.lang]);
+        break;
+
+      case 'phone_number':
+        ( ctx.update as any).session.step  = text;
+        ( ctx.update as any).session.step = 'processor';
+        await ctx.reply(GreetingMessages.processor[ctx.session.lang]);
+        break;
+
+      case 'processor':
+        ( ctx.update as any).session.step  = text;
+        ( ctx.update as any).session.step  = null; // Reset step
+
+        const result = `
+        Type: ${( ctx.update as any).session.type }
+        Price: ${( ctx.update as any).session.price }
+        Store Name: ${( ctx.update as any).session.store_name }
+        Phone Number: ${( ctx.update as any).session.phone_number }
+        Processor: ${( ctx.update as any).session.processor }
+        `;
+
+        await ctx.reply(result);
+        break;
+    }
   }
 
   @Action('elonYarat')
   async fn(ctx: ContextType) {
-    const lang = ctx.session.lang;
-
-    await ctx.reply(GreetingMessages.type[lang]);
-
-    const type = (ctx.update as any).message.text;
-
-    await ctx.reply(GreetingMessages.price[lang]);
-
-    const price = (ctx.update as any).message.text;
-
-    await ctx.reply(GreetingMessages.store_name[lang]);
-
-    const storename = (ctx.update as any).message.text;
-
-    await ctx.reply(GreetingMessages.phone_number[lang]);
-
-    const phoneNumber = (ctx.update as any).message.text;
-
-    await ctx.reply(GreetingMessages.processor[lang]);
-
-    const processor = (ctx.update as any).message.text;
-
-    const text = `
-    Type:${type}
-    Price:${price}
-    Storename:${storename}
-    Phone Number:${phoneNumber}
-    Processor:${processor}
-    `;
-    await ctx.reply(text);
+    ( ctx.update as any).session.step = 'type';
+    await ctx.reply(GreetingMessages.type[ctx.session.lang]);
   }
 }
