@@ -54,6 +54,6 @@ export class ActionsService {
   }
   @Action('pc')
   async onPc(@Ctx() ctx: ContextType) {
-    // ctx.scene.enter();
+    ctx.scene.enter('PCDevice');
   }
 }

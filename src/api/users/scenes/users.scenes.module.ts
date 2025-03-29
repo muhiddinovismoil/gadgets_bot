@@ -7,7 +7,14 @@ import {
   AskPhoneNumberForPost,
   iPhonePostScene,
 } from './iphone.scene';
-import { PcPostScene } from './pc.scene';
+import {
+  AskPhoneNumberPC,
+  AskPricePcScene,
+  AskProcessorPc,
+  AskStoreNamePc,
+  AskTypePcScene,
+  PcPostScene,
+} from './pc.scene';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserEntity } from 'src/core';
 @Module({
@@ -18,6 +25,14 @@ import { UserEntity } from 'src/core';
     AndroidPostScene,
     iPhonePostScene,
     AskiPhoneMemoryScene,
+    AskPhoneNumberForPost,
+    AskiPhonePrice,
+    PcPostScene,
+    AskTypePcScene,
+    AskPricePcScene,
+    AskStoreNamePc,
+    AskProcessorPc,
+    AskPhoneNumberPC,
     PcPostScene,
     AskPhoneNumberForPost,
     AskiPhonePrice,
