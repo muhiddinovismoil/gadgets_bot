@@ -27,8 +27,15 @@ export const GreetingMessages = {
   };
   
 
-  export const MainMessage = {
+  export const MainPcMessage = {
     uz: "E'lon berishni boshlaymizmi?",
     ru: "Начнем размещение объявления?",
     en: "Shall we start posting an ad?",
+};
+
+
+export const LastPcMessage = {
+  uz: "E'lonni Tasdiqlaysizmi!", // Do you confirm the announcement?
+  ru: "Вы подтверждаете объявление?",
+  en: "Do you confirm the announcement?",
 };
