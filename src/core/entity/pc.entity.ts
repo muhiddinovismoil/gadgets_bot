@@ -1,7 +1,7 @@
 import { BaseEntity } from 'src/common';
 import { Column, Entity } from 'typeorm';
 
-@Entity('admins')
+@Entity('pc')
 export class PcEntity extends BaseEntity {
   @Column({ type: 'varchar' })
   type: string;
