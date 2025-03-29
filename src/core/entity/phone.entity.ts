@@ -1,7 +1,7 @@
 import { BaseEntity } from 'src/common';
 import { Column, Entity } from 'typeorm';
 
-@Entity('admins')
+@Entity('phone')
 export class PhoneEntity extends BaseEntity {
   @Column({ type: 'varchar' })
   model: string;
@@ -17,9 +17,6 @@ export class PhoneEntity extends BaseEntity {
 
   @Column({ type: 'boolean' })
   exchange: boolean;
-
-  @Column({ type: 'varchar' })
-  store_username: string;
 
   @Column({ type: 'varchar' })
   phone_number: string;
