@@ -33,6 +33,9 @@ import { UserEntity } from 'src/core';
     AskStoreNamePc,
     AskProcessorPc,
     AskPhoneNumberPC,
+    PcPostScene,
+    AskPhoneNumberForPost,
+    AskiPhonePrice,
   ],
 })
 export class UserSceneModule {}
