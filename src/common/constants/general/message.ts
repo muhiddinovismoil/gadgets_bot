@@ -20,3 +20,8 @@ export const mainMessage = {
   ru: 'Выберите нужный раздел: ',
   en: 'Choose the required section: ',
 };
+export const settingsMessage = {
+  uz: "Sozlamalar Bo'limi",
+  ru: 'Настройки Раздел',
+  en: 'Settings Section',
+};
