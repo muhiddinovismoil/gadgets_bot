@@ -65,35 +65,15 @@ export class AskPricePcScene {
   async Ontext(ctx: ContextType) {
     const lang = ctx.session.lang;
     const text = (ctx.update as any).message.text;
-    console.log(typeof text);
-    if (!isNaN(Number(text))) {
+    if (isNaN(Number(text))) {
       ctx.reply(GreetingMessages.price[lang]);
-    } else {
-      await ctx.scene.enter('AskStoreName');
-    }
-  }
-}
-
-@Scene('AskStoreName')
-export class AskStoreNamePc {
-  constructor() {}
-
-  @SceneEnter()
-  async OnEnter(ctx: ContextType) {
-    const lang = ctx.session.lang;
-    await ctx.reply(GreetingMessages.store_name[lang]);
-  }
-
-  @On('text')
-  async Ontext(ctx: ContextType) {
-    const text = (ctx.update as any).message.text;
-    if (!text) {
-      await ctx.reply(GreetingMessages.store_name[ctx.session.lang]);
     } else {
       await ctx.scene.enter('AskPhoneNumberPC');
     }
   }
 }
+
+
 
 @Scene('AskPhoneNumberPC')
 export class AskPhoneNumberPC {
