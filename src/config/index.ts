@@ -7,6 +7,7 @@ export type ConfigType = {
   API_PORT: number;
   BOT_TOKEN: string;
   DB_URI: string;
+  BOT_USERNAME: string;
 };
 const requiredVariables = [
   'API_PORT',
@@ -14,6 +15,7 @@ const requiredVariables = [
   'NODE_ENV',
   'DEV_DB_URL',
   'PROD_DB_URL',
+  'BOT_USERNAME',
 ];
 const missingVariables = requiredVariables.filter((variable) => {
   const value = process.env[variable];
@@ -32,5 +34,6 @@ export const config: ConfigType = {
     process.env.NODE_ENV == 'dev'
       ? (process.env.DEV_DB_URL as string)
       : (process.env.PROD_DB_URL as string),
+  BOT_USERNAME: process.env.BOT_USERNAME as string,
 };
 export * from './telegram.config';
