@@ -1,17 +1,11 @@
 import { Update, Ctx, Command, Action } from 'nestjs-telegraf';
-import { ContextType } from 'src/common';
-import { selectLangKeys } from 'src/common/constants/general/keyboard';
-import {
-  mainMessage,
-  startMessage,
-} from 'src/common/constants/general/message';
-import { usersMenuKeys } from 'src/common/constants/users/keyboard';
+import * as common from '@/common';
 
 @Update()
 export class BotService {
   constructor() {}
   @Command('start')
-  async start(@Ctx() ctx: ContextType) {
+  async start(@Ctx() ctx: common.ContextType) {
     const data = await this.userRepo.findOne({
       where: { telegram_id: ctx.from?.id.toString() },
     });
@@ -19,19 +13,19 @@ export class BotService {
       ctx.session.lang = data?.lang;
     }
     if (data) {
-      await ctx.reply(mainMessage[ctx.session.lang], {
-        reply_markup: usersMenuKeys[ctx.session.lang],
+      await ctx.reply(common.mainMessage[ctx.session.lang], {
+        reply_markup: common.usersMenuKeys[ctx.session.lang],
       });
     } else {
-      await ctx.reply(startMessage, {
+      await ctx.reply(common.startMessage, {
         reply_markup: {
-          ...selectLangKeys,
+          ...common.selectLangKeys,
         },
       });
     }
   }
   @Action('uz')
-  async setLangUz(@Ctx() ctx: ContextType) {
+  async setLangUz(@Ctx() ctx: common.ContextType) {
     const data = await this.userRepo.findOne({
       where: { telegram_id: `${ctx.from?.id}` },
     });
@@ -47,7 +41,7 @@ export class BotService {
   }
 
   @Action('ru')
-  async setLangRu(@Ctx() ctx: ContextType) {
+  async setLangRu(@Ctx() ctx: common.ContextType) {
     const data = await this.userRepo.findOne({
       where: { telegram_id: `${ctx.from?.id}` },
     });
@@ -63,7 +57,7 @@ export class BotService {
   }
 
   @Action('en')
-  async setLangEn(@Ctx() ctx: ContextType) {
+  async setLangEn(@Ctx() ctx: common.ContextType) {
     const data = await this.userRepo.findOne({
       where: { telegram_id: `${ctx.from?.id}` },
     });

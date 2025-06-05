@@ -1,13 +1,11 @@
 import { Module } from '@nestjs/common';
-import { UserEntity } from 'src/core';
-import { TypeOrmModule } from '@nestjs/typeorm';
 import { AskPhoneNumber, RegisterScene } from './register.scene';
 import { AndroidPostScene } from './android.scene';
 import * as iPhone from './iphone.scene';
 import * as PC from './pc.scene';
 import { EditLanguageScene } from './settings.scene';
 @Module({
-  imports: [TypeOrmModule.forFeature([UserEntity])],
+  imports: [],
   providers: [
     // Main Scenes
     RegisterScene,

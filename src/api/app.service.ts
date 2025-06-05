@@ -1,7 +1,7 @@
 import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
-import { config } from 'src/config';
 import { Logger } from '@nestjs/common';
+import { config } from '@/config';
+import { AppModule } from './app.module';
 
 export class Application {
   static async main(): Promise<void> {
