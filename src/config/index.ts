@@ -13,8 +13,7 @@ const requiredVariables = [
   'API_PORT',
   'BOT_TOKEN',
   'NODE_ENV',
-  'DEV_DB_URL',
-  'PROD_DB_URL',
+  'DATABASE_URL',
   'BOT_USERNAME',
 ];
 const missingVariables = requiredVariables.filter((variable) => {
@@ -30,10 +29,7 @@ if (missingVariables.length > 0) {
 export const config: ConfigType = {
   API_PORT: parseInt(process.env.API_PORT as string, 10),
   BOT_TOKEN: process.env.BOT_TOKEN as string,
-  DB_URI:
-    process.env.NODE_ENV == 'dev'
-      ? (process.env.DEV_DB_URL as string)
-      : (process.env.PROD_DB_URL as string),
+  DB_URI: process.env.DATABASE_URL as string,
   BOT_USERNAME: process.env.BOT_USERNAME as string,
 };
 export * from './telegram.config';

@@ -28,8 +28,8 @@ export const phoneNumberKeys = {
 export const settingsKeys = {
   uz: {
     inline_keyboard: [
+      [Markup.button.callback("🔄 Tilni o'zgartirish", 'selectLang')],
       [
-        Markup.button.callback("🔄 Tilni o'zgartirish", 'selectLang'),
         Markup.button.callback(
           "📞 Telefon raqamni o'zgartirish",
           'changeNumberOfUser',
@@ -40,17 +40,15 @@ export const settingsKeys = {
   },
   en: {
     inline_keyboard: [
-      [
-        Markup.button.callback('🔄 Change language', 'selectLang'),
-        Markup.button.callback('📞 Change phone number', 'changeNumberOfUser'),
-      ],
+      [Markup.button.callback('🔄 Change language', 'selectLang')],
+      [Markup.button.callback('📞 Change phone number', 'changeNumberOfUser')],
       [Markup.button.callback('⬅️ Back', 'backToMainMenu')],
     ],
   },
   ru: {
     inline_keyboard: [
+      [Markup.button.callback('🔄 Изменить язык', 'selectLang')],
       [
-        Markup.button.callback('🔄 Изменить язык', 'selectLang'),
         Markup.button.callback(
           '📞 Изменить номер телефона',
           'changeNumberOfUser',

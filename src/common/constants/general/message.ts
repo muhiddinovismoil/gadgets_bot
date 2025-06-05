@@ -25,3 +25,8 @@ export const settingsMessage = {
   ru: 'Настройки Раздел',
   en: 'Settings Section',
 };
+export const askResetLanguageMessage = {
+  uz: "Tilni o'zgartirmoqchimisiz? \nQuyidagi tillardan birini tanlang:",
+  ru: 'Вы хотите изменить язык? \nПожалуйста, выберите один из следующих языков:',
+  en: 'Do you want to change the language? \nPlease choose one of the following languages:',
+};

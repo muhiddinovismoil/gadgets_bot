@@ -57,4 +57,8 @@ export class ActionsService {
       parse_mode: `HTML`,
     });
   }
+  @Action('selectLang')
+  async onResetLanguage(@Ctx() ctx: ContextType) {
+    ctx.scene.enter('EditLanguageScene');
+  }
 }

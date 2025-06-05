@@ -1,0 +1,97 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum RateEnum {
+  Terrible
+  Bad
+  Okay
+  Good
+  Excellent
+}
+
+enum PcEnum {
+  LAPTOP
+  PC
+}
+
+model Admin {
+  id         String  @default(dbgenerated("GEN_RANDOM_UUID()")) @map("id") @db.Uuid
+  telegramId String? @unique @map("tg_id") @db.VarChar(30)
+  fullname   String? @map("fullname") @db.VarChar(24)
+  username   String? @map("username") @db.VarChar(40)
+
+  createdAt DateTime? @default(now()) @map("created_at") @db.Timestamp
+  updatedAt DateTime? @updatedAt @map("updated_at") @db.Timestamp
+
+  @@id([id])
+  @@map("admin")
+}
+
+model User {
+  id          String  @default(dbgenerated("GEN_RANDOM_UUID()")) @map("id") @db.Uuid
+  telegramId  String? @unique @map("tg_id") @db.VarChar(30)
+  fullname    String? @map("fullname") @db.VarChar(24)
+  username    String? @map("username") @db.VarChar(40)
+  phoneNumber String? @map("phone_number") @db.VarChar(25)
+  language    String? @map("lang") @db.VarChar(2)
+
+  createdAt DateTime? @default(now()) @map("created_at") @db.Timestamp
+  updatedAt DateTime? @updatedAt @map("updated_at") @db.Timestamp
+
+  @@id([id])
+  @@map("users")
+}
+
+model Phones {
+  id            String   @default(dbgenerated("GEN_RANDOM_UUID()")) @map("id") @db.Uuid
+  price         Int?     @db.Integer
+  delivery      Boolean? @db.Boolean
+  exchange      Boolean? @db.Boolean
+  phoneNumber   String?  @map("phone_number") @db.VarChar(25)
+  region        String?  @db.VarChar(30)
+  model         String?  @db.VarChar(40)
+  memory        String?  @db.VarChar(30)
+  batteryHealth String?  @map("battery") @db.VarChar(35)
+  condition     String?  @db.VarChar(35)
+  images        Json[]   @default([])
+  otherInfo     String?  @db.Text
+
+  createdAt DateTime? @default(now()) @map("created_at") @db.Timestamp
+  updatedAt DateTime? @updatedAt @map("updated_at") @db.Timestamp
+
+  @@id([id])
+  @@map("phones")
+}
+
+model PC {
+  id           String   @default(dbgenerated("GEN_RANDOM_UUID()")) @map("id") @db.Uuid
+  type         PcEnum?
+  price        Int?     @db.Integer
+  delivery     Boolean? @db.Boolean
+  phoneNumber  String?  @map("phone_number") @db.VarChar(40)
+  model        String?  @db.VarChar(40)
+  processor    String?  @db.VarChar(40)
+  mother_board String?  @db.VarChar(40)
+  memory       String?  @db.VarChar(30)
+  images       Json[]   @default([])
+  otherInfo    String?  @db.Text
+
+  createdAt DateTime? @default(now()) @map("created_at") @db.Timestamp
+  updatedAt DateTime? @updatedAt @map("updated_at") @db.Timestamp
+
+  @@id([id])
+  @@map("pc")
+}

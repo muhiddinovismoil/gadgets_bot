@@ -14,7 +14,7 @@ export const PcKeyboard: Record<string, InlineKeyboardMarkup> = {
     inline_keyboard: [
       [
         Markup.button.callback('📢 Начнем размещение объявления?', 'elonYarat'),
-        Markup.button.callback('Назад 🔙', 'backMenu'), // Added the back button
+        Markup.button.callback('Назад 🔙', 'backMenu'),
       ],
     ],
   },

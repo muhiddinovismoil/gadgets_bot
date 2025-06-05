@@ -30,28 +30,22 @@ export const usersMenuKeys: Record<string, InlineKeyboardMarkup> = {
 export const adsCategoryKeys: Record<string, InlineKeyboardMarkup> = {
   uz: {
     inline_keyboard: [
-      [
-        Markup.button.callback('📱 Telefonlar', 'phones'),
-        Markup.button.callback('💻 Kompyuterlar', 'pc'),
-      ],
+      [Markup.button.callback('📱 Telefonlar', 'phones')],
+      [Markup.button.callback('💻 Kompyuterlar', 'pc')],
       [Markup.button.callback('Orqaga 🔙', 'backMenu')],
     ],
   },
   en: {
     inline_keyboard: [
-      [
-        Markup.button.callback('📱 Telephones', 'phones'),
-        Markup.button.callback('💻 Computers', 'pc'),
-      ],
+      [Markup.button.callback('📱 Telephones', 'phones')],
+      [Markup.button.callback('💻 Computers', 'pc')],
       [Markup.button.callback('Back 🔙', 'backMenu')],
     ],
   },
   ru: {
     inline_keyboard: [
-      [
-        Markup.button.callback('📱 Телефоны', 'phones'),
-        Markup.button.callback('💻 Компьютеры', 'pc'),
-      ],
+      [Markup.button.callback('📱 Телефоны', 'phones')],
+      [Markup.button.callback('💻 Компьютеры', 'pc')],
       [Markup.button.callback('Назад 🔙', 'backMenu')],
     ],
   },

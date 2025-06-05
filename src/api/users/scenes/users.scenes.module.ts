@@ -5,12 +5,14 @@ import { AskPhoneNumber, RegisterScene } from './register.scene';
 import { AndroidPostScene } from './android.scene';
 import * as iPhone from './iphone.scene';
 import * as PC from './pc.scene';
+import { EditLanguageScene } from './settings.scene';
 @Module({
   imports: [TypeOrmModule.forFeature([UserEntity])],
   providers: [
     // Main Scenes
     RegisterScene,
     AskPhoneNumber,
+    EditLanguageScene,
     // ---------------------------------------------------------------------
     // Android Scenes
     AndroidPostScene,
