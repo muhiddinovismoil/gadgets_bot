@@ -1,30 +1,20 @@
 import { Action, On, Scene, SceneEnter } from 'nestjs-telegraf';
-import { ContextType } from 'src/common';
-import { uzbPhoneRegex } from 'src/common/constants/general/regex';
-import {
-  PCTasdiqKeyboard,
-  PcKeyboard,
-} from 'src/common/constants/users/pc/keyboard';
-import {
-  GreetingMessages,
-  LastPcMessage,
-  MainPcMessage,
-} from 'src/common/constants/users/pc/message';
+import * as common from '@/common';
 
 @Scene('PCDevice')
 export class PcPostScene {
   constructor() {}
 
   @SceneEnter()
-  async onEnter(ctx: ContextType) {
+  async onEnter(ctx: common.ContextType) {
     const lang = ctx.session.lang;
-    await ctx.reply(MainPcMessage[lang], {
-      reply_markup: PcKeyboard[lang],
+    await ctx.reply(common.MainPcMessage[lang], {
+      reply_markup: common.PcKeyboard[lang],
     });
   }
 
   @Action('elonYarat')
-  async OnAction(ctx: ContextType) {
+  async OnAction(ctx: common.ContextType) {
     await ctx.scene.enter('AskTypePc');
   }
 }
@@ -34,17 +24,17 @@ export class AskTypePcScene {
   constructor() {}
 
   @SceneEnter()
-  async onEnter(ctx: ContextType) {
+  async onEnter(ctx: common.ContextType) {
     const lang = ctx.session.lang;
-    await ctx.reply(GreetingMessages.type[lang]);
+    await ctx.reply(common.GreetingMessages.type[lang]);
   }
 
   @On('text')
-  async Ontext(ctx: ContextType) {
+  async Ontext(ctx: common.ContextType) {
     const text = (ctx.update as any).message.text;
 
     if (!text) {
-      await ctx.reply(GreetingMessages.type[ctx.session.lang]);
+      await ctx.reply(common.GreetingMessages.type[ctx.session.lang]);
     } else {
       await ctx.scene.enter('AskPricePc');
     }
@@ -56,18 +46,18 @@ export class AskPricePcScene {
   constructor() {}
 
   @SceneEnter()
-  async onEnter(ctx: ContextType) {
+  async onEnter(ctx: common.ContextType) {
     const lang = ctx.session.lang;
-    await ctx.reply(GreetingMessages.price[lang]);
+    await ctx.reply(common.GreetingMessages.price[lang]);
   }
 
   @On('text')
-  async Ontext(ctx: ContextType) {
+  async Ontext(ctx: common.ContextType) {
     const lang = ctx.session.lang;
     const text = (ctx.update as any).message.text;
     console.log(typeof text);
     if (!isNaN(Number(text))) {
-      ctx.reply(GreetingMessages.price[lang]);
+      ctx.reply(common.GreetingMessages.price[lang]);
     } else {
       await ctx.scene.enter('AskStoreName');
     }
@@ -79,16 +69,16 @@ export class AskStoreNamePc {
   constructor() {}
 
   @SceneEnter()
-  async OnEnter(ctx: ContextType) {
+  async OnEnter(ctx: common.ContextType) {
     const lang = ctx.session.lang;
-    await ctx.reply(GreetingMessages.store_name[lang]);
+    await ctx.reply(common.GreetingMessages.store_name[lang]);
   }
 
   @On('text')
-  async Ontext(ctx: ContextType) {
+  async Ontext(ctx: common.ContextType) {
     const text = (ctx.update as any).message.text;
     if (!text) {
-      await ctx.reply(GreetingMessages.store_name[ctx.session.lang]);
+      await ctx.reply(common.GreetingMessages.store_name[ctx.session.lang]);
     } else {
       await ctx.scene.enter('AskPhoneNumberPC');
     }
@@ -99,17 +89,17 @@ export class AskStoreNamePc {
 export class AskPhoneNumberPC {
   constructor() {}
   @SceneEnter()
-  async OnEnter(ctx: ContextType) {
+  async OnEnter(ctx: common.ContextType) {
     const lang = ctx.session.lang;
-    await ctx.reply(GreetingMessages.phone_number[lang]);
+    await ctx.reply(common.GreetingMessages.phone_number[lang]);
   }
 
   @On('text')
-  async Ontext(ctx: ContextType) {
+  async Ontext(ctx: common.ContextType) {
     const lang = ctx.session.lang;
     const text = (ctx.update as any).message.text;
-    if (!uzbPhoneRegex.test(text)) {
-      ctx.reply(GreetingMessages.phone_number[lang]);
+    if (!common.uzbPhoneRegex.test(text)) {
+      ctx.reply(common.GreetingMessages.phone_number[lang]);
     } else {
       await ctx.scene.enter('AskProcessorPC');
     }
@@ -120,26 +110,26 @@ export class AskPhoneNumberPC {
 export class AskProcessorPc {
   constructor() {}
   @SceneEnter()
-  async OnEnter(ctx: ContextType) {
+  async OnEnter(ctx: common.ContextType) {
     const lang = ctx.session.lang;
-    await ctx.reply(GreetingMessages.processor[lang]);
+    await ctx.reply(common.GreetingMessages.processor[lang]);
   }
 
   @On('text')
-  async Ontext(ctx: ContextType) {
+  async Ontext(ctx: common.ContextType) {
     const lang = ctx.session.lang;
     const text = (ctx.update as any).message.text;
     if (!text) {
-      ctx.reply(GreetingMessages.processor[lang]);
+      ctx.reply(common.GreetingMessages.processor[lang]);
     } else {
-      await ctx.reply(LastPcMessage[lang], {
-        reply_markup: PCTasdiqKeyboard[lang],
+      await ctx.reply(common.LastPcMessage[lang], {
+        reply_markup: common.PCTasdiqKeyboard[lang],
       });
     }
   }
 
   @Action('elonTasdiq')
-  async OnAction(ctx: ContextType) {
+  async OnAction(ctx: common.ContextType) {
     await ctx.reply('Salomat');
   }
 }

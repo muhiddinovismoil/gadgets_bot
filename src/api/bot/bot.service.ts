@@ -1,19 +1,15 @@
-import { InjectRepository } from '@nestjs/typeorm';
-import { Update, Ctx, Command, Action, On } from 'nestjs-telegraf';
+import { Update, Ctx, Command, Action } from 'nestjs-telegraf';
 import { ContextType } from 'src/common';
 import { selectLangKeys } from 'src/common/constants/general/keyboard';
 import {
   mainMessage,
   startMessage,
 } from 'src/common/constants/general/message';
-import { UserEntity, UserRepository } from 'src/core';
 import { usersMenuKeys } from 'src/common/constants/users/keyboard';
 
 @Update()
 export class BotService {
-  constructor(
-    @InjectRepository(UserEntity) private readonly userRepo: UserRepository,
-  ) {}
+  constructor() {}
   @Command('start')
   async start(@Ctx() ctx: ContextType) {
     const data = await this.userRepo.findOne({

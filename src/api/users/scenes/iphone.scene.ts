@@ -1,22 +1,18 @@
 import { Action, On, Scene, SceneEnter } from 'nestjs-telegraf';
-import { ContextType } from 'src/common';
-import * as messages from 'src/common/constants/users/iphones/message';
-import * as regex from 'src/common/constants/users/iphones/regex/regex';
-import * as globalRegex from 'src/common/constants/general/regex';
-import * as keyboard from 'src/common/constants/users/iphones/keyboard';
+import * as common from '@/common';
 
 @Scene('iPhoneDevice')
 export class iPhonePostScene {
   constructor() {}
   @SceneEnter()
-  async onEnter(ctx: ContextType) {
-    await ctx.editMessageText(messages.askModelPhoneMsg[ctx.session.lang]);
+  async onEnter(ctx: common.ContextType) {
+    await ctx.editMessageText(common.askModelPhoneMsg[ctx.session.lang]);
   }
   @On('text')
-  async onText(ctx: ContextType) {
+  async onText(ctx: common.ContextType) {
     const model = (ctx.update as any).message.text;
-    if (!regex.iPhoneModelRegex.test(model)) {
-      await ctx.reply(messages.incorrectFormatPhoneModel[ctx.session.lang]);
+    if (!common.iPhoneModelRegex.test(model)) {
+      await ctx.reply(common.incorrectFormatPhoneModel[ctx.session.lang]);
     } else {
       await ctx.scene.enter('askMemoryOfiPhone');
     }
@@ -26,14 +22,14 @@ export class iPhonePostScene {
 export class AskiPhoneMemoryScene {
   constructor() {}
   @SceneEnter()
-  async onEnter(ctx: ContextType) {
-    await ctx.reply(messages.askStoragePhoneMsg[ctx.session.lang]);
+  async onEnter(ctx: common.ContextType) {
+    await ctx.reply(common.askStoragePhoneMsg[ctx.session.lang]);
   }
   @On('text')
-  async onText(ctx: ContextType) {
+  async onText(ctx: common.ContextType) {
     const text = (ctx.update as any).message.text;
-    if (!regex.iPhoneMemoryRegex.test(text)) {
-      await ctx.reply(messages.incorrectFormatPhoneMemory[ctx.session.lang]);
+    if (!common.iPhoneMemoryRegex.test(text)) {
+      await ctx.reply(common.incorrectFormatPhoneMemory[ctx.session.lang]);
     } else {
       await ctx.scene.enter('AskPhoneNumberForPost');
     }
@@ -43,14 +39,14 @@ export class AskiPhoneMemoryScene {
 export class AskPhoneNumberForPost {
   constructor() {}
   @SceneEnter()
-  async onEnter(ctx: ContextType) {
-    ctx.reply(messages.askPhoneNumber[ctx.session.lang]);
+  async onEnter(ctx: common.ContextType) {
+    ctx.reply(common.askPhoneNumber[ctx.session.lang]);
   }
   @On('text')
-  async onText(ctx: ContextType) {
+  async onText(ctx: common.ContextType) {
     const text = (ctx.update as any).message.text;
-    if (!globalRegex.uzbPhoneRegex.test(text)) {
-      ctx.reply(messages.incorrectPhoneNumber[ctx.session.lang]);
+    if (!common.uzbPhoneRegex.test(text)) {
+      ctx.reply(common.incorrectPhoneNumber[ctx.session.lang]);
     } else {
       await ctx.scene.enter('AskisDeliveryValid');
     }
@@ -60,17 +56,17 @@ export class AskPhoneNumberForPost {
 export class AskisDeliveryValid {
   constructor() {}
   @SceneEnter()
-  async onEnter(ctx: ContextType) {
-    ctx.reply(messages.askIsDeliveryValid[ctx.session.lang], {
-      reply_markup: keyboard.deliveryKeyboard[ctx.session.lang],
+  async onEnter(ctx: common.ContextType) {
+    ctx.reply(common.askIsDeliveryValid[ctx.session.lang], {
+      reply_markup: common.deliveryKeyboard[ctx.session.lang],
     });
   }
   @Action('yesDelivery')
-  async onYesDelivery(ctx: ContextType) {
+  async onYesDelivery(ctx: common.ContextType) {
     ctx.scene.enter('AskiPhonePrice');
   }
   @Action('noDelivery')
-  async onNoDelivery(ctx: ContextType) {
+  async onNoDelivery(ctx: common.ContextType) {
     ctx.scene.enter('AskiPhonePrice');
   }
 }
@@ -78,14 +74,14 @@ export class AskisDeliveryValid {
 export class AskiPhonePrice {
   constructor() {}
   @SceneEnter()
-  async onEnter(ctx: ContextType) {
-    ctx.editMessageText(messages.askPricePhoneMsg[ctx.session.lang]);
+  async onEnter(ctx: common.ContextType) {
+    ctx.editMessageText(common.askPricePhoneMsg[ctx.session.lang]);
   }
   @On('text')
-  async onText(ctx: ContextType) {
+  async onText(ctx: common.ContextType) {
     const message = (ctx.update as any).message.text;
-    if (!regex.iPhonePriceRegex.test(message)) {
-      ctx.reply(messages.incorrectPricePhoneMsg[ctx.session.lang]);
+    if (!common.iPhonePriceRegex.test(message)) {
+      ctx.reply(common.incorrectPricePhoneMsg[ctx.session.lang]);
     } else {
       ctx.scene.enter('AskIsExchangeValid');
     }
@@ -95,17 +91,17 @@ export class AskiPhonePrice {
 export class AskIsExchangeValid {
   constructor() {}
   @SceneEnter()
-  async onEnter(ctx: ContextType) {
-    await ctx.reply(messages.askExchange[ctx.session.lang], {
-      reply_markup: keyboard.exchangeKeyboard[ctx.session.lang],
+  async onEnter(ctx: common.ContextType) {
+    await ctx.reply(common.askExchange[ctx.session.lang], {
+      reply_markup: common.exchangeKeyboard[ctx.session.lang],
     });
   }
   @Action('yesExchange')
-  async onYesExchange(ctx: ContextType) {
+  async onYesExchange(ctx: common.ContextType) {
     await ctx.scene.enter('AskiPhoneDocumentsValid');
   }
   @Action('noExchange')
-  async onNoExchange(ctx: ContextType) {
+  async onNoExchange(ctx: common.ContextType) {
     await ctx.scene.enter('AskiPhoneDocumentsValid');
   }
 }
@@ -113,17 +109,17 @@ export class AskIsExchangeValid {
 export class AskiPhoneDocumentsValid {
   constructor() {}
   @SceneEnter()
-  async onEnter(ctx: ContextType) {
-    await ctx.editMessageText(messages.askIsDocumentsValid[ctx.session.lang], {
-      reply_markup: keyboard.documentKeyboard[ctx.session.lang],
+  async onEnter(ctx: common.ContextType) {
+    await ctx.editMessageText(common.askIsDocumentsValid[ctx.session.lang], {
+      reply_markup: common.documentKeyboard[ctx.session.lang],
     });
   }
   @Action('yesDocument')
-  async onYesDocument(ctx: ContextType) {
+  async onYesDocument(ctx: common.ContextType) {
     await ctx.scene.enter('AskiPhoneBattaryCondition');
   }
   @Action('noDocument')
-  async onNoDocument(ctx: ContextType) {
+  async onNoDocument(ctx: common.ContextType) {
     await ctx.scene.enter('AskiPhoneBattaryCondition');
   }
 }
@@ -131,14 +127,14 @@ export class AskiPhoneDocumentsValid {
 export class AskiPhoneBattaryCondition {
   constructor() {}
   @SceneEnter()
-  async onEnter(ctx: ContextType) {
-    await ctx.editMessageText(messages.askConditionOfBattary[ctx.session.lang]);
+  async onEnter(ctx: common.ContextType) {
+    await ctx.editMessageText(common.askConditionOfBattary[ctx.session.lang]);
   }
   @On('text')
-  async onText(ctx: ContextType) {
+  async onText(ctx: common.ContextType) {
     const message = (ctx.update as any).message.text;
-    if (!regex.iPhoneBattaryRegex.test(message)) {
-      await ctx.reply(messages.incorrectBattaryPhoneMsg[ctx.session.lang]);
+    if (!common.iPhoneBattaryRegex.test(message)) {
+      await ctx.reply(common.incorrectBattaryPhoneMsg[ctx.session.lang]);
     } else {
       await ctx.scene.enter('AskiPhoneRegion');
     }
@@ -148,14 +144,14 @@ export class AskiPhoneBattaryCondition {
 export class AskiPhoneRegion {
   constructor() {}
   @SceneEnter()
-  async onEnter(ctx: ContextType) {
-    await ctx.reply(messages.askRegionOfPhone[ctx.session.lang]);
+  async onEnter(ctx: common.ContextType) {
+    await ctx.reply(common.askRegionOfPhone[ctx.session.lang]);
   }
   @On('text')
-  async onText(ctx: ContextType) {
+  async onText(ctx: common.ContextType) {
     const message = (ctx.update as any).message.text;
-    if (!regex.iPhoneRegionRegex.test(message)) {
-      await ctx.reply(messages.incorrectRegionPhoneMsg[ctx.session.lang]);
+    if (!common.iPhoneRegionRegex.test(message)) {
+      await ctx.reply(common.incorrectRegionPhoneMsg[ctx.session.lang]);
     } else {
       await ctx.scene.enter('AskiPhoneImages');
     }
@@ -165,11 +161,11 @@ export class AskiPhoneRegion {
 export class AskiPhoneImages {
   constructor() {}
   @SceneEnter()
-  async onEnter(ctx: ContextType) {
-    await ctx.reply(messages.askPhoneImages[ctx.session.lang]);
+  async onEnter(ctx: common.ContextType) {
+    await ctx.reply(common.askPhoneImages[ctx.session.lang]);
   }
   @On('photo')
-  async onPhoto(ctx: ContextType) {
+  async onPhoto(ctx: common.ContextType) {
     const message = (ctx.update as any).message;
 
     if (!message.photo) {
@@ -186,7 +182,6 @@ export class AskiPhoneImages {
 
     await ctx.reply(`✅ ${fileIds.length}/6 rasm qabul qilindi.`);
 
-    // ✅ Send back each photo
     for (const fileId of fileIds) {
       await ctx.replyWithPhoto(fileId);
     }

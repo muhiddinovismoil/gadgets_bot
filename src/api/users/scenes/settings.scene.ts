@@ -1,33 +1,30 @@
-import { InjectRepository } from '@nestjs/typeorm';
 import { Action, Ctx, On, Scene, SceneEnter } from 'nestjs-telegraf';
-import { ContextType } from 'src/common';
-import { selectLangKeys } from 'src/common/constants/general/keyboard';
-import { askResetLanguageMessage } from 'src/common/constants/general/message';
-import { UserEntity, UserRepository } from 'src/core';
+import * as common from '@/common';
 
 @Scene('EditLanguageScene')
 export class EditLanguageScene {
-  constructor(
-    @InjectRepository(UserEntity) private readonly userRepo: UserRepository,
-  ) {}
+  constructor() {}
   @SceneEnter()
-  async onEnter(@Ctx() ctx: ContextType) {
+  async onEnter(@Ctx() ctx: common.ContextType) {
     const lang = ctx.session.lang;
-    ctx.editMessageText(askResetLanguageMessage[lang], selectLangKeys[lang]);
+    ctx.editMessageText(
+      common.askResetLanguageMessage[lang],
+      common.selectLangKeys[lang],
+    );
   }
 
   @Action('uz')
-  async onUzbekLang(@Ctx() ctx: ContextType) {
+  async onUzbekLang(@Ctx() ctx: common.ContextType) {
     ctx.session.lang = 'uz';
   }
 
   @Action('ru')
-  async onRussianLang(@Ctx() ctx: ContextType) {
+  async onRussianLang(@Ctx() ctx: common.ContextType) {
     ctx.session.lang = 'uz';
   }
 
   @Action('en')
-  async onEnglishLang(@Ctx() ctx: ContextType) {
+  async onEnglishLang(@Ctx() ctx: common.ContextType) {
     ctx.session.lang = 'uz';
   }
 }
@@ -35,7 +32,7 @@ export class EditLanguageScene {
 @Scene('EditPhoneNumber')
 export class EditPhoneNumber {
   @SceneEnter()
-  async onEnter(@Ctx() ctx: ContextType) {}
+  async onEnter(@Ctx() ctx: common.ContextType) {}
 
   @On('text')
   async onTextHandler() {}

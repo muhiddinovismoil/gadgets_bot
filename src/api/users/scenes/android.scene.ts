@@ -1,5 +1,5 @@
 import { Scene, SceneEnter } from 'nestjs-telegraf';
-import { ContextType } from 'src/common';
+import { ContextType } from '@/common';
 
 @Scene('AndroidDevice')
 export class AndroidPostScene {
