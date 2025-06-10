@@ -57,4 +57,14 @@ export class ActionsService {
   async onResetLanguage(@Ctx() ctx: common.ContextType) {
     ctx.scene.enter('EditLanguageScene');
   }
+
+  @Action('changeNumberOfUser')
+  async onResetPhoneNumber(@Ctx() ctx: common.ContextType) {
+    ctx.scene.enter('EditPhoneNumber');
+  }
+
+  @Action('contactAdmin')
+  async onContactWithAdmin(@Ctx() ctx: common.ContextType) {
+    await ctx.reply(`Bu funksiya xali qo'shilmadi`);
+  }
 }

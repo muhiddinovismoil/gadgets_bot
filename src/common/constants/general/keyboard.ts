@@ -35,14 +35,14 @@ export const settingsKeys = {
           'changeNumberOfUser',
         ),
       ],
-      [Markup.button.callback('⬅️ Orqaga', 'backToMainMenu')],
+      [Markup.button.callback('⬅️ Orqaga', 'backMenu')],
     ],
   },
   en: {
     inline_keyboard: [
       [Markup.button.callback('🔄 Change language', 'selectLang')],
       [Markup.button.callback('📞 Change phone number', 'changeNumberOfUser')],
-      [Markup.button.callback('⬅️ Back', 'backToMainMenu')],
+      [Markup.button.callback('⬅️ Back', 'backMenu')],
     ],
   },
   ru: {
@@ -54,7 +54,7 @@ export const settingsKeys = {
           'changeNumberOfUser',
         ),
       ],
-      [Markup.button.callback('⬅️ Назад', 'backToMainMenu')],
+      [Markup.button.callback('⬅️ Назад', 'backMenu')],
     ],
   },
 };

@@ -1,5 +1,3 @@
-import e from 'express';
-
 export const askModelPhoneMsg = {
   uz: `Telefon modelini kiriting`,
   en: `Enter the phone model`,
@@ -61,34 +59,28 @@ export const askPhoneImages = {
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 export const incorrectFormatPhoneModel = {
-  uz: `❌ Telefon modelini noto‘g‘ri kiritdingiz. iPhone bilan boshlanishi kerak! Masalan: iPhone 16 yoki iPhone X.`,
-  en: `❌ You have entered an incorrect phone model. It should start with "iPhone"! Example: iPhone 16 or iPhone X.`,
-  ru: `❌ Вы ввели некорректную модель телефона. Она должна начинаться с "iPhone"! Например: iPhone 16 или iPhone X.`,
+  uz: `Telefon modelini noto‘g‘ri kiritdingiz. iPhone bilan boshlanishi kerak! Masalan: iPhone 16 yoki iPhone X.`,
+  en: `You have entered an incorrect phone model. It should start with "iPhone"! Example: iPhone 16 or iPhone X.`,
+  ru: `Вы ввели некорректную модель телефона. Она должна начинаться с "iPhone"! Например: iPhone 16 или iPhone X.`,
 };
 export const incorrectFormatPhoneMemory = {
-  uz: `❌ Telefon xotirasini noto‘g‘ri kiritdingiz. Telefon xotirasini to'g'ri kiriting misol uchun: 4/64`,
-  en: `❌ You have entered the phone memory incorrectly. Enter the phone memory correctly, for example: 4/64`,
-  ru: `❌ Вы ввели неправильную память телефона. Введите правильно память телефона, например: 4/64`,
-};
-
-export const incorrectPhoneNumber = {
-  uz: `❌ Iltimos Telefon raqamni to'gri formatda kiriting +998XXXXXXX`,
-  en: `❌ Please enter the phone number in the correct format +998XXXXXXX`,
-  ru: `❌ Пожалуйста, введите номер телефона в правильном формате +998XXXXXXX.`,
+  uz: `Telefon xotirasini noto‘g‘ri kiritdingiz. Telefon xotirasini to'g'ri kiriting misol uchun: 4/64`,
+  en: `You have entered the phone memory incorrectly. Enter the phone memory correctly, for example: 4/64`,
+  ru: `Вы ввели неправильную память телефона. Введите правильно память телефона, например: 4/64`,
 };
 export const incorrectPricePhoneMsg = {
-  uz: `❌ Telefon narxini to'gri formatda kiriting misol uchun 160 yoki 1750000`,
-  en: `❌ Enter the phone price in the correct format, for example 160 or 1750000`,
-  ru: `❌ Введите цену телефона в правильном формате, например 160 или 1750000.`,
+  uz: `Telefon narxini to'gri formatda kiriting misol uchun 160 yoki 1750000`,
+  en: `Enter the phone price in the correct format, for example 160 or 1750000`,
+  ru: `Введите цену телефона в правильном формате, например 160 или 1750000.`,
 };
 
 export const incorrectBattaryPhoneMsg = {
-  uz: `❌ Telefon batareyasi holatini noto'g'ri kiritdingiz. Masalan: 100%`,
-  en: `❌ You have entered the phone battery condition incorrectly. For example: 100%`,
-  ru: `❌ Вы ввели состояние батареи телефона неправильно. Например: 100%`,
+  uz: `Telefon batareyasi holatini noto'g'ri kiritdingiz. Masalan: 100%`,
+  en: `You have entered the phone battery condition incorrectly. For example: 100%`,
+  ru: `Вы ввели состояние батареи телефона неправильно. Например: 100%`,
 };
 export const incorrectRegionPhoneMsg = {
-  uz: `❌ Telefon regionini noto'g'ri kiritdingiz. Masalan: LL/A`,
-  en: `❌ You have entered the phone region incorrectly. For example: LL/A`,
-  ru: `❌ Вы ввели регион телефона неправильно. Например: LL/A`,
+  uz: `Telefon regionini noto'g'ri kiritdingiz. Masalan: LL/A`,
+  en: `You have entered the phone region incorrectly. For example: LL/A`,
+  ru: `Вы ввели регион телефона неправильно. Например: LL/A`,
 };

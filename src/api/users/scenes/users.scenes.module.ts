@@ -1,19 +1,22 @@
 import { Module } from '@nestjs/common';
-import { AskPhoneNumber, RegisterScene } from './register.scene';
-import { AndroidPostScene } from './android.scene';
+import { PrismaModule } from '@/prisma';
+import * as main from './register.scene';
+import * as settings from './settings.scene';
+import * as Android from './android.scene';
 import * as iPhone from './iphone.scene';
 import * as PC from './pc.scene';
-import { EditLanguageScene } from './settings.scene';
 @Module({
-  imports: [],
+  imports: [PrismaModule],
   providers: [
     // Main Scenes
-    RegisterScene,
-    AskPhoneNumber,
-    EditLanguageScene,
+    main.RegisterScene,
+    main.AskPhoneNumber,
+    settings.EditLanguageScene,
+    settings.EditPhoneNumber,
+
     // ---------------------------------------------------------------------
     // Android Scenes
-    AndroidPostScene,
+    Android.AndroidPostScene,
     // ---------------------------------------------------------------------
 
     // ---------------------------------------------------------------------

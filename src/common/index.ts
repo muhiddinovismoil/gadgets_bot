@@ -1,2 +1,2 @@
-export * from './types/context.type';
+export * from './types';
 export * from './constants';

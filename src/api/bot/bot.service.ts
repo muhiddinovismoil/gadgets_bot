@@ -1,16 +1,17 @@
 import { Update, Ctx, Command, Action } from 'nestjs-telegraf';
 import * as common from '@/common';
+import { PrismaService } from '@/prisma';
 
 @Update()
 export class BotService {
-  constructor() {}
+  constructor(private readonly prisma: PrismaService) {}
   @Command('start')
   async start(@Ctx() ctx: common.ContextType) {
-    const data = await this.userRepo.findOne({
-      where: { telegram_id: ctx.from?.id.toString() },
+    const data = await this.prisma.user.findFirst({
+      where: { telegramId: ctx.from?.id.toString() },
     });
-    if (data?.lang) {
-      ctx.session.lang = data?.lang;
+    if (data?.language) {
+      ctx.session.lang = data?.language;
     }
     if (data) {
       await ctx.reply(common.mainMessage[ctx.session.lang], {
@@ -26,15 +27,16 @@ export class BotService {
   }
   @Action('uz')
   async setLangUz(@Ctx() ctx: common.ContextType) {
-    const data = await this.userRepo.findOne({
-      where: { telegram_id: `${ctx.from?.id}` },
+    const data = await this.prisma.user.findFirst({
+      where: { telegramId: `${ctx.from?.id}` },
     });
     if (!data) {
-      const newUser = this.userRepo.create({
-        telegram_id: ctx.from?.id?.toString(),
-        lang: 'uz',
+      await this.prisma.user.create({
+        data: {
+          telegramId: ctx.from?.id.toString(),
+          language: 'uz',
+        },
       });
-      await this.userRepo.save(newUser);
     }
     ctx.session.lang = 'uz';
     ctx.scene.enter('Register');
@@ -42,15 +44,16 @@ export class BotService {
 
   @Action('ru')
   async setLangRu(@Ctx() ctx: common.ContextType) {
-    const data = await this.userRepo.findOne({
-      where: { telegram_id: `${ctx.from?.id}` },
+    const data = await this.prisma.user.findFirst({
+      where: { telegramId: `${ctx.from?.id}` },
     });
     if (!data) {
-      const newUser = this.userRepo.create({
-        telegram_id: ctx.from?.id?.toString(),
-        lang: 'ru',
+      await this.prisma.user.create({
+        data: {
+          telegramId: ctx.from?.id?.toString(),
+          language: 'ru',
+        },
       });
-      await this.userRepo.save(newUser);
     }
     ctx.session.lang = 'ru';
     ctx.scene.enter('Register');
@@ -58,15 +61,16 @@ export class BotService {
 
   @Action('en')
   async setLangEn(@Ctx() ctx: common.ContextType) {
-    const data = await this.userRepo.findOne({
-      where: { telegram_id: `${ctx.from?.id}` },
+    const data = await this.prisma.user.findFirst({
+      where: { telegramId: `${ctx.from?.id}` },
     });
     if (!data) {
-      const newUser = this.userRepo.create({
-        telegram_id: ctx.from?.id?.toString(),
-        lang: 'en',
+      await this.prisma.user.create({
+        data: {
+          telegramId: ctx.from?.id?.toString(),
+          language: 'en',
+        },
       });
-      await this.userRepo.save(newUser);
     }
     ctx.session.lang = 'en';
     ctx.scene.enter('Register');

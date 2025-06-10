@@ -33,7 +33,7 @@ export const MainPcMessage = {
 };
 
 export const LastPcMessage = {
-  uz: "E'lonni Tasdiqlaysizmi!", // Do you confirm the announcement?
+  uz: "E'lonni Tasdiqlaysizmi!",
   ru: 'Вы подтверждаете объявление?',
   en: 'Do you confirm the announcement?',
 };

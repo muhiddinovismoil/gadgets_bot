@@ -1,4 +1,4 @@
-import { PhonesI } from 'src/common/types/phone.type';
+import { PhonesI } from '@/common';
 
 export function iphoneTemplate(data: PhonesI) {
   const narxi = data.price.toString().length;
