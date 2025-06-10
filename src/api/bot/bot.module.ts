@@ -1,14 +1,12 @@
 import { Module } from '@nestjs/common';
 import { TelegrafModule } from 'nestjs-telegraf';
-import { options } from 'src/config';
+import { options } from '@/config';
 import { BotService } from './bot.service';
-import { TypeOrmModule } from '@nestjs/typeorm';
+import { UserModule } from '../users/users.module';
+import { PrismaModule } from '@/prisma';
 
 @Module({
-  imports: [
-    TypeOrmModule.forFeature([]),
-    TelegrafModule.forRootAsync(options()),
-  ],
+  imports: [PrismaModule, TelegrafModule.forRootAsync(options()), UserModule],
   providers: [BotService],
 })
 export class BotModule {}

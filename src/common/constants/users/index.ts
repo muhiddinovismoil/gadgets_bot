@@ -1,3 +1,4 @@
+export * from './iphones';
+export * from './pc';
 export * from './keyboard';
-export * from './regex';
 export * from './message';

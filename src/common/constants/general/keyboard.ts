@@ -25,3 +25,36 @@ export const phoneNumberKeys = {
     one_time_keyboard: true,
   },
 };
+export const settingsKeys = {
+  uz: {
+    inline_keyboard: [
+      [Markup.button.callback("🔄 Tilni o'zgartirish", 'selectLang')],
+      [
+        Markup.button.callback(
+          "📞 Telefon raqamni o'zgartirish",
+          'changeNumberOfUser',
+        ),
+      ],
+      [Markup.button.callback('⬅️ Orqaga', 'backMenu')],
+    ],
+  },
+  en: {
+    inline_keyboard: [
+      [Markup.button.callback('🔄 Change language', 'selectLang')],
+      [Markup.button.callback('📞 Change phone number', 'changeNumberOfUser')],
+      [Markup.button.callback('⬅️ Back', 'backMenu')],
+    ],
+  },
+  ru: {
+    inline_keyboard: [
+      [Markup.button.callback('🔄 Изменить язык', 'selectLang')],
+      [
+        Markup.button.callback(
+          '📞 Изменить номер телефона',
+          'changeNumberOfUser',
+        ),
+      ],
+      [Markup.button.callback('⬅️ Назад', 'backMenu')],
+    ],
+  },
+};
