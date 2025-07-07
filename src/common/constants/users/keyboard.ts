@@ -5,7 +5,12 @@ export const usersMenuKeys: Record<string, InlineKeyboardMarkup> = {
   uz: {
     inline_keyboard: [
       [Markup.button.callback(`📢 E'lon berish`, 'postAd')],
-      [Markup.button.url(`📜 E'lonlarni ko‘rish`, 'https://t.me/TechBoz0r')],
+      [
+        Markup.button.url(
+          `📜 E'lonlarni ko‘rish`,
+          'https://t.me/TechBozorOfficial',
+        ),
+      ],
       [Markup.button.callback(`📞 Admin bilan bog‘lanish`, 'contactAdmin')],
       [Markup.button.callback('⚙️ Sozlamalar', 'settings')],
     ],
@@ -13,7 +18,7 @@ export const usersMenuKeys: Record<string, InlineKeyboardMarkup> = {
   en: {
     inline_keyboard: [
       [Markup.button.callback('📢 Post an Ad', 'postAd')],
-      [Markup.button.url('📜 View Ads', 'https://t.me/TechBoz0r')],
+      [Markup.button.url('📜 View Ads', 'https://t.me/TechBozorOfficial')],
       [Markup.button.callback('📞 Contact Admin', 'contactAdmin')],
       [Markup.button.callback('⚙️ Settings', 'settings')],
     ],
@@ -21,7 +26,12 @@ export const usersMenuKeys: Record<string, InlineKeyboardMarkup> = {
   ru: {
     inline_keyboard: [
       [Markup.button.callback('📢 Разместить объявление', 'postAd')],
-      [Markup.button.url('📜 Просмотр объявлений', 'https://t.me/TechBoz0r')],
+      [
+        Markup.button.url(
+          '📜 Просмотр объявлений',
+          'https://t.me/TechBozorOfficial',
+        ),
+      ],
       [Markup.button.callback('📞 Связаться с админом', 'contactAdmin')],
       [Markup.button.callback('⚙️ Настройки', 'settings')],
     ],
