@@ -36,11 +36,6 @@ import * as PC from './pc.scene';
     // ---------------------------------------------------------------------
     // Pc Scenes
     PC.PcPostScene,
-    PC.AskTypePcScene,
-    PC.AskPricePcScene,
-    PC.AskStoreNamePc,
-    PC.AskProcessorPc,
-    PC.AskPhoneNumberPC,
     // ---------------------------------------------------------------------
   ],
 })

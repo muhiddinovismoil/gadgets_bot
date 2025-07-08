@@ -65,6 +65,8 @@ export class ActionsService {
 
   @Action('contactAdmin')
   async onContactWithAdmin(@Ctx() ctx: common.ContextType) {
-    await ctx.reply(`Bu funksiya xali qo'shilmadi`);
+    await ctx.editMessageText(
+      `Bu funksiya xali qo'shilmadi qayta boshlash uchun /start ni bosing`,
+    );
   }
 }
