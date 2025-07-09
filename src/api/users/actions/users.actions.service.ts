@@ -40,7 +40,7 @@ export class ActionsService {
   }
   @Action('Android')
   async onAndroid(@Ctx() ctx: common.ContextType) {
-    // ctx.scene.enter();
+    ctx.scene.enter('AndroidDevice');
   }
   @Action('pc')
   async onPc(@Ctx() ctx: common.ContextType) {
