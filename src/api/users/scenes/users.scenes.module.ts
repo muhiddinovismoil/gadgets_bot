@@ -17,6 +17,14 @@ import * as PC from './pc.scene';
     // ---------------------------------------------------------------------
     // Android Scenes
     Android.AndroidPostScene,
+    Android.InfinixScene,
+    Android.MiScene,
+    Android.OppoScene,
+    Android.PocoScene,
+    Android.RealmeScene,
+    Android.RedmiScene,
+    Android.SamsungScene,
+    Android.TechnoScene,
     // ---------------------------------------------------------------------
 
     // ---------------------------------------------------------------------
