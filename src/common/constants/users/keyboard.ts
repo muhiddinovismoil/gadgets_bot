@@ -61,31 +61,49 @@ export const adsCategoryKeys: Record<string, InlineKeyboardMarkup> = {
   },
 };
 
+export const pcTypeKeys: Record<string, InlineKeyboardMarkup> = {
+  uz: {
+    inline_keyboard: [
+      [Markup.button.callback('Laptop uchun', 'forLaptop')],
+      [Markup.button.callback('PC uchun', 'forPC')],
+      [Markup.button.callback('Orqaga 🔙', 'backAdsCategory')],
+    ],
+  },
+  ru: {
+    inline_keyboard: [
+      [Markup.button.callback('Для ноутбука', 'forLaptop')],
+      [Markup.button.callback('Для ПК', 'forPC')],
+      [Markup.button.callback('Назад 🔙', 'backAdsCategory')],
+    ],
+  },
+  en: {
+    inline_keyboard: [
+      [Markup.button.callback('For Laptop', 'forLaptop')],
+      [Markup.button.callback('For PC', 'forPC')],
+      [Markup.button.callback('Back 🔙', 'backAdsCategory')],
+    ],
+  },
+};
+
 export const telephoneTypeKeys: Record<string, InlineKeyboardMarkup> = {
   uz: {
     inline_keyboard: [
-      [
-        Markup.button.callback('iPhone uchun', 'iPhone'),
-        Markup.button.callback('Android uchun', 'Android'),
-      ],
+      [Markup.button.callback('iPhone uchun', 'iPhone')],
+      [Markup.button.callback('Android uchun', 'Android')],
       [Markup.button.callback('Orqaga 🔙', 'backAdsCategory')],
     ],
   },
   en: {
     inline_keyboard: [
-      [
-        Markup.button.callback('For iPhone', 'iPhone'),
-        Markup.button.callback('For Android', 'Android'),
-      ],
+      [Markup.button.callback('For iPhone', 'iPhone')],
+      [Markup.button.callback('For Android', 'Android')],
       [Markup.button.callback('Back 🔙', 'backAdsCategory')],
     ],
   },
   ru: {
     inline_keyboard: [
-      [
-        Markup.button.callback('Для iPhone', 'iPhone'),
-        Markup.button.callback('Для Android', 'Android'),
-      ],
+      [Markup.button.callback('Для iPhone', 'iPhone')],
+      [Markup.button.callback('Для Android', 'Android')],
       [Markup.button.callback('Назад 🔙', 'backAdsCategory')],
     ],
   },

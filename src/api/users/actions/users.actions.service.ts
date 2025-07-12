@@ -17,7 +17,7 @@ export class ActionsService {
   }
   @Action('phones')
   async phonePosts(@Ctx() ctx: common.ContextType) {
-    ctx.editMessageText(common.phonesTypeMsg[ctx.session.lang], {
+    ctx.editMessageText(common.deviceTypeMsg[ctx.session.lang], {
       reply_markup: common.telephoneTypeKeys[ctx.session.lang],
       parse_mode: `HTML`,
     });
@@ -44,7 +44,9 @@ export class ActionsService {
   }
   @Action('pc')
   async onPc(@Ctx() ctx: common.ContextType) {
-    ctx.scene.enter('PCDevice');
+    await ctx.editMessageText(common.deviceTypeMsg[ctx.session.lang], {
+      reply_markup: common.pcTypeKeys[ctx.session.lang],
+    });
   }
   @Action('settings')
   async onSettings(@Ctx() ctx: common.ContextType) {

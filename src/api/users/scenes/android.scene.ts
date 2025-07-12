@@ -58,7 +58,7 @@ export class SamsungScene {
   @SceneEnter()
   async onEnter(ctx: ContextType) {
     const lang = ctx?.session?.lang;
-    await ctx.editMessageText(AndroidDeviceModelAskMsg('samsung')[lang]);
+    await ctx.editMessageText(AndroidDeviceModelAskMsg('samsung')![lang]);
   }
 }
 
@@ -68,7 +68,7 @@ export class OppoScene {
   @SceneEnter()
   async onEnter(ctx: ContextType) {
     const lang = ctx?.session?.lang;
-    await ctx.editMessageText(AndroidDeviceModelAskMsg('oppo')[lang]);
+    await ctx.editMessageText(AndroidDeviceModelAskMsg('oppo')![lang]);
   }
 }
 
@@ -78,7 +78,7 @@ export class RedmiScene {
   @SceneEnter()
   async onEnter(ctx: ContextType) {
     const lang = ctx?.session?.lang;
-    await ctx.editMessageText(AndroidDeviceModelAskMsg('redmi')[lang]);
+    await ctx.editMessageText(AndroidDeviceModelAskMsg('redmi')![lang]);
   }
 }
 
@@ -88,7 +88,7 @@ export class MiScene {
   @SceneEnter()
   async onEnter(ctx: ContextType) {
     const lang = ctx?.session?.lang;
-    await ctx.editMessageText(AndroidDeviceModelAskMsg('mi')[lang]);
+    await ctx.editMessageText(AndroidDeviceModelAskMsg('mi')![lang]);
   }
 }
 
@@ -98,7 +98,7 @@ export class RealmeScene {
   @SceneEnter()
   async onEnter(ctx: ContextType) {
     const lang = ctx?.session?.lang;
-    await ctx.editMessageText(AndroidDeviceModelAskMsg('realme')[lang]);
+    await ctx.editMessageText(AndroidDeviceModelAskMsg('realme')![lang]);
   }
 }
 
@@ -108,7 +108,7 @@ export class InfinixScene {
   @SceneEnter()
   async onEnter(ctx: ContextType) {
     const lang = ctx?.session?.lang;
-    await ctx.editMessageText(AndroidDeviceModelAskMsg('infinix')[lang]);
+    await ctx.editMessageText(AndroidDeviceModelAskMsg('infinix')![lang]);
   }
 }
 
@@ -118,7 +118,7 @@ export class PocoScene {
   @SceneEnter()
   async onEnter(ctx: ContextType) {
     const lang = ctx?.session?.lang;
-    await ctx.editMessageText(AndroidDeviceModelAskMsg('poco')[lang]);
+    await ctx.editMessageText(AndroidDeviceModelAskMsg('poco')![lang]);
   }
 }
 
@@ -128,6 +128,6 @@ export class TechnoScene {
   @SceneEnter()
   async onEnter(ctx: ContextType) {
     const lang = ctx?.session?.lang;
-    await ctx.editMessageText(AndroidDeviceModelAskMsg('tecno')[lang]);
+    await ctx.editMessageText(AndroidDeviceModelAskMsg('tecno')![lang]);
   }
 }
