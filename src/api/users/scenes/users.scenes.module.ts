@@ -27,6 +27,11 @@ import * as PC from './pc.scene';
     Android.TecnoScene,
     Android.AskAndroidMemoryScene,
     Android.AskisDeliveryValidForAndroid,
+    Android.AskAndroidBattaryCondition,
+    Android.AskAndroidPrice,
+    Android.AskAndroidRegion,
+    Android.AskIsExchangeValidOnAndroid,
+    Android.AskAndroidDocumentsValid,
     // ---------------------------------------------------------------------
 
     // ---------------------------------------------------------------------

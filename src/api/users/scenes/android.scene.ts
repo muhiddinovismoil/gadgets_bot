@@ -231,11 +231,11 @@ export class AskisDeliveryValidForAndroid {
   }
   @Action('yesDeliveryAndroid')
   async onYesDelivery(ctx: common.ContextType) {
-    ctx.scene.enter('AskiPhonePrice');
+    ctx.scene.enter('AskAndroidPrice');
   }
   @Action('noDeliveryAndroid')
   async onNoDelivery(ctx: common.ContextType) {
-    ctx.scene.enter('AskiPhonePrice');
+    ctx.scene.enter('AskAndroidPrice');
   }
 }
 @Scene('AskAndroidPrice')
@@ -279,7 +279,7 @@ export class AskAndroidDocumentsValid {
   constructor() {}
   @SceneEnter()
   async onEnter(ctx: common.ContextType) {
-    ctx.editMessageText(common.askIsDocumentsValid[ctx.session.lang], {
+    await ctx.editMessageText(common.askIsDocumentsValid[ctx.session.lang], {
       reply_markup: common.documentKeyboardAndroid[ctx.session.lang],
     });
   }
@@ -323,7 +323,7 @@ export class AskAndroidRegion {
   constructor() {}
   @SceneEnter()
   async onEnter(ctx: common.ContextType) {
-    await ctx.reply(common.askRegionOfPhone[ctx.session.lang]);
+    await ctx.editMessageText(common.askRegionOfPhone[ctx.session.lang]);
   }
   @On('text')
   async onText(ctx: common.ContextType) {
