@@ -238,3 +238,96 @@ export class AskisDeliveryValidForAndroid {
     ctx.scene.enter('AskiPhonePrice');
   }
 }
+@Scene('AskAndroidPrice')
+export class AskAndroidPrice {
+  constructor() {}
+  @SceneEnter()
+  async onEnter(ctx: common.ContextType) {
+    ctx.editMessageText(common.askPricePhoneMsg[ctx.session.lang]);
+  }
+  @On('text')
+  async onText(ctx: common.ContextType) {
+    const message = (ctx.update as any).message.text;
+    if (!common.PhonePriceRegex.test(message)) {
+      ctx.reply(common.incorrectPricePhoneMsg[ctx.session.lang]);
+    } else {
+      ctx.scene.enter('AskIsExchangeValidOnAndroid');
+    }
+  }
+}
+@Scene('AskIsExchangeValidOnAndroid')
+export class AskIsExchangeValidOnAndroid {
+  constructor() {}
+  @SceneEnter()
+  async onEnter(ctx: common.ContextType) {
+    ctx.reply(common.askExchange[ctx.session.lang], {
+      reply_markup: common.exchangeKeyboardAndroid[ctx.session.lang],
+    });
+  }
+  @Action('yesExchangeAndroid')
+  async onYesExchangeHandler(ctx: common.ContextType) {
+    await ctx.scene.enter('AskAndroidDocumentsValid');
+  }
+
+  @Action('noExchangeAndroid')
+  async onNoExchangeHandler(ctx: common.ContextType) {
+    await ctx.scene.enter('AskAndroidDocumentsValid');
+  }
+}
+@Scene('AskAndroidDocumentsValid')
+export class AskAndroidDocumentsValid {
+  constructor() {}
+  @SceneEnter()
+  async onEnter(ctx: common.ContextType) {
+    ctx.editMessageText(common.askIsDocumentsValid[ctx.session.lang], {
+      reply_markup: common.documentKeyboardAndroid[ctx.session.lang],
+    });
+  }
+
+  @Action('yesDocumentAndroid')
+  async onYesDocument(ctx: common.ContextType) {
+    ctx.scene.enter('AskAndroidBattaryCondition');
+  }
+
+  @Action('noDocumentAndroid')
+  async onNoDocument(ctx: common.ContextType) {
+    ctx.scene.enter('AskAndroidBattaryCondition');
+  }
+}
+@Scene('AskAndroidBattaryCondition')
+export class AskAndroidBattaryCondition {
+  constructor() {}
+  @SceneEnter()
+  async onEnter(ctx: common.ContextType) {
+    await ctx.editMessageText(common.askConditionOfBattary[ctx.session.lang], {
+      reply_markup: common.batteryConditionAndroid[ctx.session.lang],
+    });
+  }
+  @Action('batteryGood')
+  async onBattaryGood(ctx: common.ContextType) {
+    await ctx.scene.enter('AskAndroidRegion');
+  }
+
+  @Action('batteryAverage')
+  async onBatteryAverage(ctx: common.ContextType) {
+    await ctx.scene.enter('AskAndroidRegion');
+  }
+
+  @Action('batteryBad')
+  async onBatteryBad(ctx: common.ContextType) {
+    await ctx.scene.enter('AskAndroidRegion');
+  }
+}
+@Scene('AskAndroidRegion')
+export class AskAndroidRegion {
+  constructor() {}
+  @SceneEnter()
+  async onEnter(ctx: common.ContextType) {
+    await ctx.reply(common.askRegionOfPhone[ctx.session.lang]);
+  }
+  @On('text')
+  async onText(ctx: common.ContextType) {
+    const message = (ctx.update as any).message.text;
+    await ctx.scene.enter('AskiPhoneImages');
+  }
+}

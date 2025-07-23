@@ -8,25 +8,10 @@ export const askStoragePhoneMsg = {
   en: `Enter phone memory, for example: 4/64`,
   ru: `Введите память телефона, например: 4/64`,
 };
-export const askPricePhoneMsg = {
-  uz: `Telefon narxini kiriting`,
-  en: `Enter the price of the phone`,
-  ru: `Введите стоимость телефона`,
-};
 export const askPhoneNumber = {
   uz: `Telefon raqam kiriting`,
   en: `Enter a phone number`,
   ru: `Введите номер телефона`,
-};
-export const askExchange = {
-  uz: `Telefonni almashtira olasizmi?`,
-  en: `Can you exchange the phone?`,
-  ru: `Можно ли обменять телефон?`,
-};
-export const askIsDocumentsValid = {
-  uz: 'Telefonni document va karobkasi bormi ?',
-  en: 'Does the phone have documents and box?',
-  ru: 'Есть ли на телефоне документы и коробка?',
 };
 export const askRegionOfPhone = {
   uz: `Telefoningizni regionini kiriting`,

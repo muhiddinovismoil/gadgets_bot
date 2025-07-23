@@ -13,3 +13,18 @@ export const askIsDeliveryValid = {
   en: `Is there delivery ?`,
   ru: `Есть ли доставка ?`,
 };
+export const askPricePhoneMsg = {
+  uz: `Telefon narxini kiriting`,
+  en: `Enter the price of the phone`,
+  ru: `Введите стоимость телефона`,
+};
+export const askExchange = {
+  uz: `Telefonni almashtira olasizmi?`,
+  en: `Can you exchange the phone?`,
+  ru: `Можно ли обменять телефон?`,
+};
+export const askIsDocumentsValid = {
+  uz: 'Telefonni document va karobkasi bormi ?',
+  en: 'Does the phone have documents and box?',
+  ru: 'Есть ли на телефоне документы и коробка?',
+};

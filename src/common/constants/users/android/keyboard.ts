@@ -98,3 +98,86 @@ export const deliveryKeyboardAndroid: Record<string, InlineKeyboardMarkup> = {
     ],
   },
 };
+
+export const exchangeKeyboardAndroid: Record<string, InlineKeyboardMarkup> = {
+  uz: {
+    inline_keyboard: [
+      [
+        Markup.button.callback('Ha', 'yesExchangeAndroid'),
+        Markup.button.callback("Yo'q", 'noExchangeAndroid'),
+      ],
+    ],
+  },
+  en: {
+    inline_keyboard: [
+      [
+        Markup.button.callback('Yes', 'yesExchangeAndroid'),
+        Markup.button.callback('No', 'noExchangeAndroid'),
+      ],
+    ],
+  },
+  ru: {
+    inline_keyboard: [
+      [
+        Markup.button.callback('Да', 'yesExchangeAndroid'),
+        Markup.button.callback('Нет', 'noExchangeAndroid'),
+      ],
+    ],
+  },
+};
+export const documentKeyboardAndroid: Record<string, InlineKeyboardMarkup> = {
+  uz: {
+    inline_keyboard: [
+      [
+        Markup.button.callback('Ha', 'yesDocumentAndroid'),
+        Markup.button.callback("Yo'q", 'noDocumentAndroid'),
+      ],
+    ],
+  },
+  en: {
+    inline_keyboard: [
+      [
+        Markup.button.callback('Yes', 'yesDocumentAndroid'),
+        Markup.button.callback('No', 'noDocumentAndroid'),
+      ],
+    ],
+  },
+  ru: {
+    inline_keyboard: [
+      [
+        Markup.button.callback('Да', 'yesDocumentAndroid'),
+        Markup.button.callback('Нет', 'noDocumentAndroid'),
+      ],
+    ],
+  },
+};
+
+export const batteryConditionAndroid: Record<string, InlineKeyboardMarkup> = {
+  uz: {
+    inline_keyboard: [
+      [
+        Markup.button.callback('🟢 Yaxshi', 'batteryGood'),
+        Markup.button.callback("🟡 O'rtacha", 'batteryAverage'),
+      ],
+      [Markup.button.callback('🔴 Yomon', 'batteryBad')],
+    ],
+  },
+  en: {
+    inline_keyboard: [
+      [
+        Markup.button.callback('🟢 Good', 'batteryGood'),
+        Markup.button.callback('🟡 Average', 'batteryAverage'),
+      ],
+      [Markup.button.callback('🔴 Bad', 'batteryBad')],
+    ],
+  },
+  ru: {
+    inline_keyboard: [
+      [
+        Markup.button.callback('🟢 Хорошее', 'batteryGood'),
+        Markup.button.callback('🟡 Среднее', 'batteryAverage'),
+      ],
+      [Markup.button.callback('🔴 Плохое', 'batteryBad')],
+    ],
+  },
+};
