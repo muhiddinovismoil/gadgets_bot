@@ -9,29 +9,29 @@ export const askStoragePhoneMsg = {
   ru: `Введите память телефона, например: 4/64`,
 };
 export const askPhoneNumber = {
-  uz: `Telefon raqam kiriting`,
-  en: `Enter a phone number`,
-  ru: `Введите номер телефона`,
+  uz: `Telefon raqam kiriting 📞`,
+  en: `Enter a phone number 📞`,
+  ru: `Введите номер телефона 📞`,
 };
 export const askRegionOfPhone = {
-  uz: `Telefoningizni regionini kiriting`,
-  en: 'Enter the region of your phone',
-  ru: 'Введите регион вашего телефона',
+  uz: `Telefoningizni regionini kiriting 🌎`,
+  en: 'Enter the region of your phone 🌎',
+  ru: 'Введите регион вашего телефона 🌎',
 };
 export const askConditionOfBattary = {
-  uz: `Telefoningizni batareyasi holatini kiriting`,
-  en: 'Enter the condition of your phone battery',
-  ru: 'Введите состояние батареи вашего телефона',
+  uz: `Telefoningizni batareyasi holatini kiriting 🔋`,
+  en: 'Enter the condition of your phone battery 🔋',
+  ru: 'Введите состояние батареи вашего телефона 🔋',
 };
 export const askConditionOfPhone = {
-  uz: `Telefoningizni xolatini kiriting`,
-  en: 'Enter the condition of your phone',
-  ru: 'Введите состояние вашего телефона',
+  uz: `Telefoningizni xolatini kiriting 🛠`,
+  en: 'Enter the condition of your phone 🛠',
+  ru: 'Введите состояние вашего телефона 🛠',
 };
 export const askPhoneImages = {
-  uz: `Telefoningizni rasmini jo'nating`,
-  en: 'Send your phone pictures',
-  ru: 'Отправьте фотографии вашего телефона',
+  uz: `Telefoningizni rasmini jo'nating 🖼`,
+  en: 'Send your phone pictures 🖼',
+  ru: 'Отправьте фотографии вашего телефона 🖼',
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
