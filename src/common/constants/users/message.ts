@@ -8,3 +8,8 @@ export const deviceTypeMsg = {
   en: `Select device type`,
   ru: `Выберите тип устройства`,
 };
+export const askIsDeliveryValid = {
+  uz: `Yetkazib berish bormi ?`,
+  en: `Is there delivery ?`,
+  ru: `Есть ли доставка ?`,
+};

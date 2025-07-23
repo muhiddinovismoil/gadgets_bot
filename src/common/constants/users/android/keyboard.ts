@@ -1,3 +1,4 @@
+import { Markup } from 'telegraf';
 import { InlineKeyboardMarkup, InlineKeyboardButton } from 'telegraf/types';
 
 export const TypeOfAndroidPhone: Record<string, Record<string, string>> = {
@@ -71,3 +72,29 @@ export function getPhoneBrandKeyboard(lang: string): {
     },
   };
 }
+export const deliveryKeyboardAndroid: Record<string, InlineKeyboardMarkup> = {
+  uz: {
+    inline_keyboard: [
+      [
+        Markup.button.callback('Ha', 'yesDeliveryAndroid'),
+        Markup.button.callback("Yo'q", 'noDeliveryAndroid'),
+      ],
+    ],
+  },
+  en: {
+    inline_keyboard: [
+      [
+        Markup.button.callback('Yes', 'yesDeliveryAndroid'),
+        Markup.button.callback('No', 'noDeliveryAndroid'),
+      ],
+    ],
+  },
+  ru: {
+    inline_keyboard: [
+      [
+        Markup.button.callback('Да', 'yesDeliveryAndroid'),
+        Markup.button.callback('Нет', 'noDeliveryAndroid'),
+      ],
+    ],
+  },
+};

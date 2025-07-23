@@ -18,11 +18,6 @@ export const askPhoneNumber = {
   en: `Enter a phone number`,
   ru: `Введите номер телефона`,
 };
-export const askIsDeliveryValid = {
-  uz: `Yetkazib berish bormi ?`,
-  en: `Is there delivery ?`,
-  ru: `Есть ли доставка ?`,
-};
 export const askExchange = {
   uz: `Telefonni almashtira olasizmi?`,
   en: `Can you exchange the phone?`,

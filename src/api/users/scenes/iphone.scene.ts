@@ -28,32 +28,15 @@ export class AskiPhoneMemoryScene {
   @On('text')
   async onText(ctx: common.ContextType) {
     const text = (ctx.update as any).message.text;
-    if (!common.iPhoneMemoryRegex.test(text)) {
+    if (!common.PhoneMemoryRegex.test(text)) {
       await ctx.reply(common.incorrectFormatPhoneMemory[ctx.session.lang]);
     } else {
-      await ctx.scene.enter('AskPhoneNumberForPost');
+      await ctx.scene.enter('AskisDeliveryValidForIphone');
     }
   }
 }
-@Scene('AskPhoneNumberForPost')
-export class AskPhoneNumberForPost {
-  constructor() {}
-  @SceneEnter()
-  async onEnter(ctx: common.ContextType) {
-    ctx.reply(common.askPhoneNumber[ctx.session.lang]);
-  }
-  @On('text')
-  async onText(ctx: common.ContextType) {
-    const text = (ctx.update as any).message.text;
-    if (!common.uzbPhoneRegex.test(text)) {
-      ctx.reply(common.incorrectPhoneNumber[ctx.session.lang]);
-    } else {
-      await ctx.scene.enter('AskisDeliveryValid');
-    }
-  }
-}
-@Scene('AskisDeliveryValid')
-export class AskisDeliveryValid {
+@Scene('AskisDeliveryValidForIphone')
+export class AskisDeliveryValidForIphone {
   constructor() {}
   @SceneEnter()
   async onEnter(ctx: common.ContextType) {
@@ -80,7 +63,7 @@ export class AskiPhonePrice {
   @On('text')
   async onText(ctx: common.ContextType) {
     const message = (ctx.update as any).message.text;
-    if (!common.iPhonePriceRegex.test(message)) {
+    if (!common.PhonePriceRegex.test(message)) {
       ctx.reply(common.incorrectPricePhoneMsg[ctx.session.lang]);
     } else {
       ctx.scene.enter('AskIsExchangeValid');

@@ -24,7 +24,9 @@ import * as PC from './pc.scene';
     Android.RealmeScene,
     Android.RedmiScene,
     Android.SamsungScene,
-    Android.TechnoScene,
+    Android.TecnoScene,
+    Android.AskAndroidMemoryScene,
+    Android.AskisDeliveryValidForAndroid,
     // ---------------------------------------------------------------------
 
     // ---------------------------------------------------------------------
@@ -32,13 +34,12 @@ import * as PC from './pc.scene';
     iPhone.iPhonePostScene,
     iPhone.AskiPhonePrice,
     iPhone.AskiPhoneMemoryScene,
-    iPhone.AskPhoneNumberForPost,
     iPhone.AskiPhoneDocumentsValid,
     iPhone.AskiPhoneBattaryCondition,
     iPhone.AskiPhoneImages,
     iPhone.AskiPhoneRegion,
     iPhone.AskIsExchangeValid,
-    iPhone.AskisDeliveryValid,
+    iPhone.AskisDeliveryValidForIphone,
     // ---------------------------------------------------------------------
 
     // ---------------------------------------------------------------------
