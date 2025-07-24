@@ -8,11 +8,7 @@ export const askStoragePhoneMsg = {
   en: `Enter phone memory, for example: 4/64`,
   ru: `Введите память телефона, например: 4/64`,
 };
-export const askPhoneNumber = {
-  uz: `Telefon raqam kiriting 📞`,
-  en: `Enter a phone number 📞`,
-  ru: `Введите номер телефона 📞`,
-};
+
 export const askRegionOfPhone = {
   uz: `Telefoningizni regionini kiriting 🌎`,
   en: 'Enter the region of your phone 🌎',

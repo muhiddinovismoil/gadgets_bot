@@ -28,3 +28,8 @@ export const askIsDocumentsValid = {
   en: 'Does the phone have documents and box?',
   ru: 'Есть ли на телефоне документы и коробка?',
 };
+export const askPhoneNumber = {
+  uz: `Telefon raqam kiriting 📞`,
+  en: `Enter a phone number 📞`,
+  ru: `Введите номер телефона 📞`,
+};
