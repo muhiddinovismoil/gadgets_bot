@@ -88,6 +88,20 @@ export class AskIsExchangeValid {
     await ctx.scene.enter('AskiPhoneDocumentsValid');
   }
 }
+@Scene('AskiPhoneCondition')
+export class AskiPhoneCondition {
+  constructor() {}
+
+  @SceneEnter()
+  async onEnter(ctx: common.ContextType) {
+    await ctx.editMessageText(
+      common.buildConditionKeyboard({ isPhoneAndroid: false })[
+        ctx.session.lang
+      ],
+    );
+  }
+}
+
 @Scene('AskiPhoneDocumentsValid')
 export class AskiPhoneDocumentsValid {
   constructor() {}
@@ -141,34 +155,4 @@ export class AskiPhoneRegion {
   }
 }
 @Scene('AskiPhoneImages')
-export class AskiPhoneImages {
-  constructor() {}
-  @SceneEnter()
-  async onEnter(ctx: common.ContextType) {
-    await ctx.reply(common.askPhoneImages[ctx.session.lang]);
-  }
-  @On('photo')
-  async onPhoto(ctx: common.ContextType) {
-    const message = (ctx.update as any).message;
-
-    if (!message.photo) {
-      await ctx.reply('⚠️ Iltimos, rasm yuboring.');
-      return;
-    }
-
-    const fileIds = message.photo.map((photo) => photo.file_id);
-
-    if (fileIds.length > 6) {
-      await ctx.reply('❌ Siz maksimum 6 ta rasm yuborishingiz mumkin.');
-      return;
-    }
-
-    await ctx.reply(`✅ ${fileIds.length}/6 rasm qabul qilindi.`);
-
-    for (const fileId of fileIds) {
-      await ctx.replyWithPhoto(fileId);
-    }
-
-    await ctx.scene.leave();
-  }
-}
+export class AskiPhoneImages {}

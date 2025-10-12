@@ -42,12 +42,6 @@ export class ActionsService {
   async onAndroid(@Ctx() ctx: common.ContextType) {
     ctx.scene.enter('AndroidDevice');
   }
-  @Action('pc')
-  async onPc(@Ctx() ctx: common.ContextType) {
-    await ctx.editMessageText(common.deviceTypeMsg[ctx.session.lang], {
-      reply_markup: common.pcTypeKeys[ctx.session.lang],
-    });
-  }
   @Action('settings')
   async onSettings(@Ctx() ctx: common.ContextType) {
     ctx.editMessageText(common.settingsMessage[ctx.session.lang], {

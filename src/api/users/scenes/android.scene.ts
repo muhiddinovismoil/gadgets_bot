@@ -1,4 +1,4 @@
-import { Action, On, Scene, SceneEnter } from 'nestjs-telegraf';
+import { Action, Ctx, On, Scene, SceneEnter } from 'nestjs-telegraf';
 import { CallbackQuery } from 'telegraf/types';
 import * as common from '@/common';
 
@@ -328,6 +328,23 @@ export class AskAndroidRegion {
   @On('text')
   async onText(ctx: common.ContextType) {
     const message = (ctx.update as any).message.text;
-    await ctx.scene.enter('AskiPhoneImages');
+    await ctx.scene.enter('AskAndroidOtherInfos');
   }
+}
+
+@Scene('AskAndroidOtherInfos')
+export class AskAndroidOtherInfos {
+  constructor() {}
+
+  @SceneEnter()
+  async onEnter(ctx: common.ContextType) {
+    await ctx.editMessageText('');
+  }
+  @On('text')
+  async onText(ctx: common.ContextType) {}
+}
+
+@Scene('AskAndroidImages')
+export class AskAndroidImages {
+  constructor() {}
 }

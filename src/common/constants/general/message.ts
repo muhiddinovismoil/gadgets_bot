@@ -50,3 +50,8 @@ export const successMessageResetPhoneNumber = {
   ru: 'Ваш номер телефона успешно изменён',
   en: 'Your phone number has been successfully changed',
 };
+export const conditionOfPhoneMessage = {
+  uz: 'Telefoningizni holatini tanlang',
+  ru: 'Введите состояние вашего телефона',
+  en: 'Enter the condition of your phone',
+};

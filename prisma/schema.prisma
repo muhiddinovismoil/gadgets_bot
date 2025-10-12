@@ -6,7 +6,6 @@
 
 generator client {
   provider = "prisma-client-js"
-  // output   = "../generated/prisma"
 }
 
 datasource db {
@@ -20,11 +19,6 @@ enum RateEnum {
   Okay
   Good
   Excellent
-}
-
-enum PcEnum {
-  LAPTOP
-  PC
 }
 
 model Admin {
@@ -65,6 +59,7 @@ model Phones {
   model         String?  @db.VarChar(40)
   memory        String?  @db.VarChar(30)
   batteryHealth String?  @map("battery") @db.VarChar(35)
+  // document      Boolean? @db.Boolean
   condition     String?  @db.VarChar(35)
   images        Json[]   @default([])
   otherInfo     String?  @db.Text
@@ -74,24 +69,4 @@ model Phones {
 
   @@id([id])
   @@map("phones")
-}
-
-model PC {
-  id           String   @default(dbgenerated("GEN_RANDOM_UUID()")) @map("id") @db.Uuid
-  type         PcEnum?
-  price        Int?     @db.Integer
-  delivery     Boolean? @db.Boolean
-  phoneNumber  String?  @map("phone_number") @db.VarChar(40)
-  model        String?  @db.VarChar(40)
-  processor    String?  @db.VarChar(40)
-  mother_board String?  @db.VarChar(40)
-  memory       String?  @db.VarChar(30)
-  images       Json[]   @default([])
-  otherInfo    String?  @db.Text
-
-  createdAt DateTime? @default(now()) @map("created_at") @db.Timestamp
-  updatedAt DateTime? @updatedAt @map("updated_at") @db.Timestamp
-
-  @@id([id])
-  @@map("pc")
 }

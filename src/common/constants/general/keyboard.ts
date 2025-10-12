@@ -1,3 +1,4 @@
+import { Lang } from '@/common/types';
 import { Markup } from 'telegraf';
 import { InlineKeyboardMarkup } from 'telegraf/typings/core/types/typegram';
 
@@ -58,3 +59,31 @@ export const settingsKeys = {
     ],
   },
 };
+
+export function buildConditionKeyboard({
+  isPhoneAndroid,
+}: {
+  isPhoneAndroid: boolean;
+}) {
+  const prefix = isPhoneAndroid ? 'android' : 'iphone';
+
+  const buttons = [
+    [
+      { text: 'A+ (Deyarli yangi)', callback_data: `${prefix}_Aplus` },
+      { text: 'A (Yaxshi holat)', callback_data: `${prefix}_A` },
+    ],
+    [
+      { text: 'B (O‘rta holat)', callback_data: `${prefix}_B` },
+      { text: 'C (Qoniqarli)', callback_data: `${prefix}_C` },
+    ],
+    [{ text: '⚙️ Faqat qismlar uchun', callback_data: `${prefix}_parts` }],
+  ];
+
+  const langs: Record<Lang, any> = {
+    uz: { inline_keyboard: buttons },
+    ru: { inline_keyboard: buttons },
+    en: { inline_keyboard: buttons },
+  };
+
+  return langs;
+}

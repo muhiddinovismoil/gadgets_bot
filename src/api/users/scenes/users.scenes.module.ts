@@ -4,7 +4,7 @@ import * as main from './register.scene';
 import * as settings from './settings.scene';
 import * as Android from './android.scene';
 import * as iPhone from './iphone.scene';
-import * as PC from './pc.scene';
+
 @Module({
   imports: [PrismaModule],
   providers: [
@@ -32,6 +32,7 @@ import * as PC from './pc.scene';
     Android.AskAndroidRegion,
     Android.AskIsExchangeValidOnAndroid,
     Android.AskAndroidDocumentsValid,
+    Android.AskAndroidOtherInfos,
     // ---------------------------------------------------------------------
 
     // ---------------------------------------------------------------------
@@ -45,12 +46,6 @@ import * as PC from './pc.scene';
     iPhone.AskiPhoneRegion,
     iPhone.AskIsExchangeValid,
     iPhone.AskisDeliveryValidForIphone,
-    // ---------------------------------------------------------------------
-
-    // ---------------------------------------------------------------------
-    // Pc Scenes
-    PC.PcPostScene,
-    // ---------------------------------------------------------------------
   ],
 })
 export class UserSceneModule {}

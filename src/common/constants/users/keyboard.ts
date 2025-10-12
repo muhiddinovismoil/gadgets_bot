@@ -41,46 +41,19 @@ export const adsCategoryKeys: Record<string, InlineKeyboardMarkup> = {
   uz: {
     inline_keyboard: [
       [Markup.button.callback('📱 Telefonlar', 'phones')],
-      [Markup.button.callback('💻 Kompyuterlar', 'pc')],
       [Markup.button.callback('Orqaga 🔙', 'backMenu')],
     ],
   },
   en: {
     inline_keyboard: [
       [Markup.button.callback('📱 Telephones', 'phones')],
-      [Markup.button.callback('💻 Computers', 'pc')],
       [Markup.button.callback('Back 🔙', 'backMenu')],
     ],
   },
   ru: {
     inline_keyboard: [
       [Markup.button.callback('📱 Телефоны', 'phones')],
-      [Markup.button.callback('💻 Компьютеры', 'pc')],
       [Markup.button.callback('Назад 🔙', 'backMenu')],
-    ],
-  },
-};
-
-export const pcTypeKeys: Record<string, InlineKeyboardMarkup> = {
-  uz: {
-    inline_keyboard: [
-      [Markup.button.callback('Laptop uchun', 'forLaptop')],
-      [Markup.button.callback('PC uchun', 'forPC')],
-      [Markup.button.callback('Orqaga 🔙', 'backAdsCategory')],
-    ],
-  },
-  ru: {
-    inline_keyboard: [
-      [Markup.button.callback('Для ноутбука', 'forLaptop')],
-      [Markup.button.callback('Для ПК', 'forPC')],
-      [Markup.button.callback('Назад 🔙', 'backAdsCategory')],
-    ],
-  },
-  en: {
-    inline_keyboard: [
-      [Markup.button.callback('For Laptop', 'forLaptop')],
-      [Markup.button.callback('For PC', 'forPC')],
-      [Markup.button.callback('Back 🔙', 'backAdsCategory')],
     ],
   },
 };
