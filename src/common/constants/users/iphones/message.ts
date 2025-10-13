@@ -3,22 +3,7 @@ export const askModelPhoneMsg = {
   en: `Enter the phone model`,
   ru: `Введите модель телефона`,
 };
-export const askStoragePhoneMsg = {
-  uz: `Telefon xotirasini kiriting misol uchun: 4/64`,
-  en: `Enter phone memory, for example: 4/64`,
-  ru: `Введите память телефона, например: 4/64`,
-};
 
-export const askRegionOfPhone = {
-  uz: `Telefoningizni regionini kiriting 🌎`,
-  en: 'Enter the region of your phone 🌎',
-  ru: 'Введите регион вашего телефона 🌎',
-};
-export const askConditionOfBattary = {
-  uz: `Telefoningizni batareyasi holatini kiriting 🔋`,
-  en: 'Enter the condition of your phone battery 🔋',
-  ru: 'Введите состояние батареи вашего телефона 🔋',
-};
 export const askConditionOfPhone = {
   uz: `Telefoningizni xolatini kiriting 🛠`,
   en: 'Enter the condition of your phone 🛠',

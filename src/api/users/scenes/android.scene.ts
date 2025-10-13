@@ -1,6 +1,9 @@
-import { Action, Ctx, On, Scene, SceneEnter } from 'nestjs-telegraf';
-import { CallbackQuery } from 'telegraf/types';
+import { Action, Ctx, InjectBot, On, Scene, SceneEnter } from 'nestjs-telegraf';
+import { CallbackQuery, InputMediaPhoto } from 'telegraf/types';
 import * as common from '@/common';
+import { Telegraf } from 'telegraf';
+import { androidTemplate } from '@/common/constants/users/android/template';
+import { PrismaService } from '@/prisma';
 
 @Scene('AndroidDevice')
 export class AndroidPostScene {
@@ -17,6 +20,7 @@ export class AndroidPostScene {
     const callbackQuery = ctx.callbackQuery as CallbackQuery.DataQuery;
     const callbackData = callbackQuery.data;
     const brandKey = callbackData.split('_')[1];
+    ctx.session.androidInfo = common.defaultPhoneInfo;
     await ctx.answerCbQuery();
     switch (brandKey) {
       case 'redmi':
@@ -64,6 +68,7 @@ export class SamsungScene {
   @On('text')
   async onTextHandler(ctx: common.ContextType) {
     const model = (ctx.update as any).message.text;
+    ctx.session.androidInfo.model = `Samsung ${model}`;
     await ctx.scene.enter('AskMemoryOfAndroid');
   }
 }
@@ -83,6 +88,7 @@ export class OppoScene {
   @On('text')
   async onTextHandler(ctx: common.ContextType) {
     const model = (ctx.update as any).message.text;
+    ctx.session.androidInfo.model = `Oppo ${model}`;
     await ctx.scene.enter('AskMemoryOfAndroid');
   }
 }
@@ -102,6 +108,7 @@ export class RedmiScene {
   @On('text')
   async onTextHandler(ctx: common.ContextType) {
     const model = (ctx.update as any).message.text;
+    ctx.session.androidInfo.model = `Xiaomi Redmi ${model}`;
     await ctx.scene.enter('AskMemoryOfAndroid');
   }
 }
@@ -121,6 +128,7 @@ export class MiScene {
   @On('text')
   async onTextHandler(ctx: common.ContextType) {
     const model = (ctx.update as any).message.text;
+    ctx.session.androidInfo.model = `Xiaomi MI ${model}`;
     await ctx.scene.enter('AskMemoryOfAndroid');
   }
 }
@@ -140,6 +148,7 @@ export class RealmeScene {
   @On('text')
   async onTextHandler(ctx: common.ContextType) {
     const model = (ctx.update as any).message.text;
+    ctx.session.androidInfo.model = `Realme ${model}`;
     await ctx.scene.enter('AskMemoryOfAndroid');
   }
 }
@@ -161,6 +170,7 @@ export class InfinixScene {
   @On('text')
   async onTextHandler(ctx: common.ContextType) {
     const model = (ctx.update as any).message.text;
+    ctx.session.androidInfo.model = `Infinix ${model}`;
     await ctx.scene.enter('AskMemoryOfAndroid');
   }
 }
@@ -180,6 +190,7 @@ export class PocoScene {
   @On('text')
   async onTextHandler(ctx: common.ContextType) {
     const model = (ctx.update as any).message.text;
+    ctx.session.androidInfo.model = `Xiaomi Poco ${model}`;
     await ctx.scene.enter('AskMemoryOfAndroid');
   }
 }
@@ -199,23 +210,29 @@ export class TecnoScene {
   @On('text')
   async onTextHandler(ctx: common.ContextType) {
     const model = (ctx.update as any).message.text;
+    ctx.session.androidInfo.model = `Tecno ${model}`;
     await ctx.scene.enter('AskMemoryOfAndroid');
   }
 }
 
 @Scene('AskMemoryOfAndroid')
 export class AskAndroidMemoryScene {
-  constructor() {}
+  constructor(private readonly prisma: PrismaService) {}
   @SceneEnter()
-  async onEnter(ctx: common.ContextType) {
+  async onEnter(@Ctx() ctx: common.ContextType) {
     await ctx.reply(common.askStoragePhoneMsg[ctx.session.lang]);
   }
   @On('text')
   async onText(ctx: common.ContextType) {
     const text = (ctx.update as any).message.text;
+    const data = await this.prisma.user.findFirst({
+      where: { telegramId: ctx.from?.id.toString() },
+    });
     if (!common.PhoneMemoryRegex.test(text)) {
       await ctx.reply(common.incorrectFormatPhoneMemory[ctx.session.lang]);
     } else {
+      ctx.session.androidInfo.memory = text;
+      ctx.session.androidInfo.phone_number = data?.phoneNumber as string;
       await ctx.scene.enter('AskisDeliveryValidForAndroid');
     }
   }
@@ -231,10 +248,12 @@ export class AskisDeliveryValidForAndroid {
   }
   @Action('yesDeliveryAndroid')
   async onYesDelivery(ctx: common.ContextType) {
+    ctx.session.androidInfo.delivery = true;
     ctx.scene.enter('AskAndroidPrice');
   }
   @Action('noDeliveryAndroid')
   async onNoDelivery(ctx: common.ContextType) {
+    ctx.session.androidInfo.delivery = false;
     ctx.scene.enter('AskAndroidPrice');
   }
 }
@@ -251,6 +270,7 @@ export class AskAndroidPrice {
     if (!common.PhonePriceRegex.test(message)) {
       ctx.reply(common.incorrectPricePhoneMsg[ctx.session.lang]);
     } else {
+      ctx.session.androidInfo.price = message;
       ctx.scene.enter('AskIsExchangeValidOnAndroid');
     }
   }
@@ -266,11 +286,13 @@ export class AskIsExchangeValidOnAndroid {
   }
   @Action('yesExchangeAndroid')
   async onYesExchangeHandler(ctx: common.ContextType) {
+    ctx.session.androidInfo.exchange = true;
     await ctx.scene.enter('AskAndroidDocumentsValid');
   }
 
   @Action('noExchangeAndroid')
   async onNoExchangeHandler(ctx: common.ContextType) {
+    ctx.session.androidInfo.exchange = false;
     await ctx.scene.enter('AskAndroidDocumentsValid');
   }
 }
@@ -286,11 +308,13 @@ export class AskAndroidDocumentsValid {
 
   @Action('yesDocumentAndroid')
   async onYesDocument(ctx: common.ContextType) {
+    ctx.session.androidInfo.document = true;
     ctx.scene.enter('AskAndroidBattaryCondition');
   }
 
   @Action('noDocumentAndroid')
   async onNoDocument(ctx: common.ContextType) {
+    ctx.session.androidInfo.document = false;
     ctx.scene.enter('AskAndroidBattaryCondition');
   }
 }
@@ -305,16 +329,19 @@ export class AskAndroidBattaryCondition {
   }
   @Action('batteryGood')
   async onBattaryGood(ctx: common.ContextType) {
+    ctx.session.androidInfo.batteryHealth = 'Yaxshi';
     await ctx.scene.enter('AskAndroidRegion');
   }
 
   @Action('batteryAverage')
   async onBatteryAverage(ctx: common.ContextType) {
+    ctx.session.androidInfo.batteryHealth = `O'rtacha`;
     await ctx.scene.enter('AskAndroidRegion');
   }
 
   @Action('batteryBad')
   async onBatteryBad(ctx: common.ContextType) {
+    ctx.session.androidInfo.batteryHealth = 'Yomon';
     await ctx.scene.enter('AskAndroidRegion');
   }
 }
@@ -328,6 +355,7 @@ export class AskAndroidRegion {
   @On('text')
   async onText(ctx: common.ContextType) {
     const message = (ctx.update as any).message.text;
+    ctx.session.androidInfo.region = message;
     await ctx.scene.enter('AskAndroidOtherInfos');
   }
 }
@@ -338,13 +366,83 @@ export class AskAndroidOtherInfos {
 
   @SceneEnter()
   async onEnter(ctx: common.ContextType) {
-    await ctx.editMessageText('');
+    await ctx.reply(common.askOtherInfoAboutPhone[ctx.session.lang]);
   }
   @On('text')
-  async onText(ctx: common.ContextType) {}
+  async onText(ctx: common.ContextType) {
+    const message = (ctx.update as any).message.text;
+    ctx.session.androidInfo.otherInfo = message;
+    await ctx.scene.enter('AskAndroidImages');
+  }
 }
 
 @Scene('AskAndroidImages')
 export class AskAndroidImages {
-  constructor() {}
+  constructor(@InjectBot() private readonly telegram: Telegraf) {}
+
+  @SceneEnter()
+  async onEnter(ctx: common.ContextType) {
+    await ctx.reply(common.askPhoneImages[ctx.session.lang]);
+    ctx.session.androidInfo.images = [];
+    ctx.session.sendToAdmin = false; // yangi flag
+  }
+
+  @On('message')
+  async onMessage(ctx: common.ContextType) {
+    const images = ctx.session.androidInfo.images || [];
+
+    if (ctx.message && 'photo' in ctx.message) {
+      images.push(ctx.message.photo[ctx.message.photo.length - 1].file_id);
+
+      if (images.length > 6) {
+        images.pop();
+        await ctx.reply('❗️ Siz faqat 6 tagacha rasm yuborishingiz mumkin.');
+      } else {
+        ctx.session.androidInfo.images = images;
+        await ctx.reply(`📸 Rasm qabul qilindi. Jami: ${images.length}/6`);
+      }
+
+      // ⚡ faqat bir marta post yuborish
+      if (!ctx.session.sendToAdmin) {
+        ctx.session.sendToAdmin = true;
+        // buni Finish tugmasi bilan ham chaqirsa bo‘ladi
+        await this.sendPostToAdmin(ctx);
+      }
+
+      return;
+    }
+
+    await ctx.reply('Iltimos, rasm yuboring.');
+  }
+
+  async sendPostToAdmin(ctx: common.ContextType) {
+    const images = ctx.session.androidInfo.images || [];
+    const phoneInfo = androidTemplate(
+      ctx.session.androidInfo as common.PhoneInfoI,
+    );
+
+    if (!images.length)
+      return await ctx.reply('Iltimos, kamida bitta rasm yuboring.');
+    if (!phoneInfo)
+      return await ctx.reply('Telefon haqida ma’lumot kiritilmagan.');
+
+    const ADMIN_CHANNEL_ID = process.env.ADMIN_CHANNEL_ID!;
+
+    const media: InputMediaPhoto[] = images.map((file_id, index) => ({
+      type: 'photo' as const,
+      media: file_id,
+      caption: index === 0 ? phoneInfo : undefined,
+      parse_mode: 'HTML',
+    }));
+
+    await this.telegram.telegram.sendMediaGroup(ADMIN_CHANNEL_ID, media);
+
+    await ctx.reply(
+      '✅ Rasm va telefon ma’lumotlari admin kanaliga yuborildi.',
+    );
+
+    ctx.session.androidInfo.images = [];
+    ctx.session.sendToAdmin = false;
+    ctx.scene.leave();
+  }
 }

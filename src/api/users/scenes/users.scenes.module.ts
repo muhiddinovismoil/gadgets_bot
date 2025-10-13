@@ -33,6 +33,7 @@ import * as iPhone from './iphone.scene';
     Android.AskIsExchangeValidOnAndroid,
     Android.AskAndroidDocumentsValid,
     Android.AskAndroidOtherInfos,
+    Android.AskAndroidImages,
     // ---------------------------------------------------------------------
 
     // ---------------------------------------------------------------------
@@ -46,6 +47,7 @@ import * as iPhone from './iphone.scene';
     iPhone.AskiPhoneRegion,
     iPhone.AskIsExchangeValid,
     iPhone.AskisDeliveryValidForIphone,
+    iPhone.AskiPhoneOtherInfo,
   ],
 })
 export class UserSceneModule {}

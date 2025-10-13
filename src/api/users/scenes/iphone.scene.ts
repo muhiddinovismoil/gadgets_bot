@@ -150,9 +150,25 @@ export class AskiPhoneRegion {
     if (!common.iPhoneRegionRegex.test(message)) {
       await ctx.reply(common.incorrectRegionPhoneMsg[ctx.session.lang]);
     } else {
-      await ctx.scene.enter('AskiPhoneImages');
+      await ctx.scene.enter('AskiPhoneOtherInfo');
     }
   }
 }
+
+@Scene('AskiPhoneOtherInfo')
+export class AskiPhoneOtherInfo {
+  constructor() {}
+
+  @SceneEnter()
+  async onEnter(ctx: common.ContextType) {
+    await ctx.reply(common.askOtherInfoAboutPhone[ctx.session.lang]);
+  }
+
+  @On('text')
+  async onText(ctx: common.ContextType) {
+    ctx.scene.enter('AskiPhoneImages');
+  }
+}
+
 @Scene('AskiPhoneImages')
 export class AskiPhoneImages {}

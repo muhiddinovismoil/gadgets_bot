@@ -59,7 +59,7 @@ model Phones {
   model         String?  @db.VarChar(40)
   memory        String?  @db.VarChar(30)
   batteryHealth String?  @map("battery") @db.VarChar(35)
-  // document      Boolean? @db.Boolean
+  document      Boolean? @db.Boolean
   condition     String?  @db.VarChar(35)
   images        Json[]   @default([])
   otherInfo     String?  @db.Text

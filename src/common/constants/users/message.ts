@@ -33,3 +33,27 @@ export const askPhoneNumber = {
   en: `Enter a phone number 📞`,
   ru: `Введите номер телефона 📞`,
 };
+
+export const askStoragePhoneMsg = {
+  uz: `Telefon xotirasini kiriting misol uchun: 4/64`,
+  en: `Enter phone memory, for example: 4/64`,
+  ru: `Введите память телефона, например: 4/64`,
+};
+
+export const askConditionOfBattary = {
+  uz: `Telefoningizni batareyasi holatini kiriting 🔋`,
+  en: 'Enter the condition of your phone battery 🔋',
+  ru: 'Введите состояние батареи вашего телефона 🔋',
+};
+
+export const askRegionOfPhone = {
+  uz: `Telefoningizni regionini kiriting 🌎`,
+  en: 'Enter the region of your phone 🌎',
+  ru: 'Введите регион вашего телефона 🌎',
+};
+
+export const askOtherInfoAboutPhone = {
+  uz: `Iltimos, telefoningiz haqida qo‘shimcha ma’lumot bering.`,
+  ru: `Пожалуйста, укажите дополнительную информацию о вашем телефоне.`,
+  en: `Please provide additional information about your phone.`,
+};
