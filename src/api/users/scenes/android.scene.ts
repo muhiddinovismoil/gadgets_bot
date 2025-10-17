@@ -384,7 +384,7 @@ export class AskAndroidImages {
   async onEnter(ctx: common.ContextType) {
     await ctx.reply(common.askPhoneImages[ctx.session.lang]);
     ctx.session.androidInfo.images = [];
-    ctx.session.sendToAdmin = false; // yangi flag
+    ctx.session.sendToAdmin = false;
   }
 
   @On('message')
@@ -396,23 +396,19 @@ export class AskAndroidImages {
 
       if (images.length > 6) {
         images.pop();
-        await ctx.reply('❗️ Siz faqat 6 tagacha rasm yuborishingiz mumkin.');
+        await ctx.reply(common.alertSendingImageLimitMsg[ctx.session.lang]);
       } else {
         ctx.session.androidInfo.images = images;
-        await ctx.reply(`📸 Rasm qabul qilindi. Jami: ${images.length}/6`);
       }
-
-      // ⚡ faqat bir marta post yuborish
       if (!ctx.session.sendToAdmin) {
         ctx.session.sendToAdmin = true;
-        // buni Finish tugmasi bilan ham chaqirsa bo‘ladi
         await this.sendPostToAdmin(ctx);
       }
 
       return;
     }
 
-    await ctx.reply('Iltimos, rasm yuboring.');
+    await ctx.reply(common.requestImageMessage[ctx.session.lang]);
   }
 
   async sendPostToAdmin(ctx: common.ContextType) {
@@ -422,9 +418,13 @@ export class AskAndroidImages {
     );
 
     if (!images.length)
-      return await ctx.reply('Iltimos, kamida bitta rasm yuboring.');
+      return await ctx.reply(
+        common.askSendingAtLeastOneImage[ctx.session.lang],
+      );
     if (!phoneInfo)
-      return await ctx.reply('Telefon haqida ma’lumot kiritilmagan.');
+      return await ctx.reply(
+        common.thereIsNoAnyInfoAboutPhone[ctx.session.lang],
+      );
 
     const ADMIN_CHANNEL_ID = process.env.ADMIN_CHANNEL_ID!;
 
@@ -436,10 +436,6 @@ export class AskAndroidImages {
     }));
 
     await this.telegram.telegram.sendMediaGroup(ADMIN_CHANNEL_ID, media);
-
-    await ctx.reply(
-      '✅ Rasm va telefon ma’lumotlari admin kanaliga yuborildi.',
-    );
 
     ctx.session.androidInfo.images = [];
     ctx.session.sendToAdmin = false;

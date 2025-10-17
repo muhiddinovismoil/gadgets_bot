@@ -57,3 +57,27 @@ export const askOtherInfoAboutPhone = {
   ru: `Пожалуйста, укажите дополнительную информацию о вашем телефоне.`,
   en: `Please provide additional information about your phone.`,
 };
+
+export const alertSendingImageLimitMsg = {
+  uz: '❗️ Siz faqat 6 tagacha rasm yuborishingiz mumkin.',
+  ru: '❗️ Вы можете отправить только до 6 изображений.',
+  en: '❗️ You can only send up to 6 images.',
+};
+
+export const requestImageMessage = {
+  uz: 'Iltimos, rasm yuboring.',
+  ru: 'Пожалуйста, отправьте изображение.',
+  en: 'Please send an image.',
+};
+
+export const askSendingAtLeastOneImage = {
+  uz: 'Iltimos, kamida bitta rasm yuboring.',
+  ru: 'Пожалуйста, отправьте хотя бы одно изображение.',
+  en: 'Please send at least one image.',
+};
+
+export const thereIsNoAnyInfoAboutPhone = {
+  uz: "Telefon haqida ma'lumot kiritilmagan.",
+  ru: 'Информация о телефоне не введена.',
+  en: 'No information about the phone has been entered.',
+};
