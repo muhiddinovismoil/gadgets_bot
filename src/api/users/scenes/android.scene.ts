@@ -8,6 +8,7 @@ import { PrismaService } from '@/prisma';
 @Scene('AndroidDevice')
 export class AndroidPostScene {
   constructor() {}
+
   @SceneEnter()
   async onEnter(ctx: common.ContextType) {
     const lang = ctx?.session?.lang;

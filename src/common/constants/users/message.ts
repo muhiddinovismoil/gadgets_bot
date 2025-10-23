@@ -81,3 +81,9 @@ export const thereIsNoAnyInfoAboutPhone = {
   ru: 'Информация о телефоне не введена.',
   en: 'No information about the phone has been entered.',
 };
+
+export const askingConfirmation = {
+  uz: "Barcha ma'lumotlar to'g'rimi?",
+  ru: 'Все данные верны?',
+  en: 'Is all the information correct?',
+};

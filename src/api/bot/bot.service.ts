@@ -1,11 +1,12 @@
-import { Update, Ctx, Command, Action } from 'nestjs-telegraf';
+import { Update, Ctx, Action, Hears, Command } from 'nestjs-telegraf';
 import * as common from '@/common';
 import { PrismaService } from '@/prisma';
 
 @Update()
 export class BotService {
   constructor(private readonly prisma: PrismaService) {}
-  @Command('start')
+
+  @Command('/start')
   async start(@Ctx() ctx: common.ContextType) {
     const data = await this.prisma.user.findFirst({
       where: { telegramId: ctx.from?.id.toString() },
