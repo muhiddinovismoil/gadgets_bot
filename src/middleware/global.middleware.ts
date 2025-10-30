@@ -46,7 +46,7 @@ export class GlobalUpdate {
         if (ctx.callbackQuery) {
           const data =
             'data' in ctx.callbackQuery ? ctx.callbackQuery.data : '';
-          if (data?.startsWith('approve_') || data?.startsWith('reject_')) {
+          if (data?.startsWith('ap_') || data?.startsWith('rj_')) {
             return next();
           }
 
