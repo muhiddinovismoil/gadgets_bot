@@ -51,15 +51,15 @@ model User {
 
 model Phones {
   id            String   @default(dbgenerated("GEN_RANDOM_UUID()")) @map("id")
+  model         String?  @db.VarChar(40)
   price         Int?     @db.Integer
+  memory        String?  @db.VarChar(30)
+  region        String?  @db.VarChar(30)
   delivery      Boolean? @db.Boolean
   exchange      Boolean? @db.Boolean
-  phoneNumber   String?  @map("phone_number") @db.VarChar(25)
-  region        String?  @db.VarChar(30)
-  model         String?  @db.VarChar(40)
-  memory        String?  @db.VarChar(30)
-  batteryHealth String?  @map("battery") @db.VarChar(35)
   document      Boolean? @db.Boolean
+  phoneNumber   String?  @map("phone_number") @db.VarChar(25)
+  batteryHealth String?  @map("battery") @db.VarChar(35)
   condition     String?  @db.VarChar(35)
   images        Json[]   @default([])
   otherInfo     String?  @db.Text
