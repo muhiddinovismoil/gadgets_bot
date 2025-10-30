@@ -50,7 +50,7 @@ model User {
 }
 
 model Phones {
-  id            String   @default(dbgenerated("GEN_RANDOM_UUID()")) @map("id") @db.Uuid
+  id            String   @default(dbgenerated("GEN_RANDOM_UUID()")) @map("id")
   price         Int?     @db.Integer
   delivery      Boolean? @db.Boolean
   exchange      Boolean? @db.Boolean

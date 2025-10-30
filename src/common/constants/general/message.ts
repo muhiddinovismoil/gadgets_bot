@@ -3,6 +3,12 @@ export const startMessage =
   'Hello.\nChoose a language that suits you: \n\n' +
   'Здравствуйте.\nВыберите подходящий вам язык: \n\n';
 
+export const askPleaseFillCorrectly = {
+  uz: 'Iltimos, postni to‘g‘ri to‘ldiring!',
+  ru: 'Пожалуйста, заполните пост правильно!',
+  en: 'Please fill in the post correctly!',
+};
+
 export const askName = {
   uz: `Ismingizni kiriting`,
   ru: `Введите свое имя`,
@@ -54,4 +60,10 @@ export const conditionOfPhoneMessage = {
   uz: 'Telefoningizni holatini tanlang',
   ru: 'Введите состояние вашего телефона',
   en: 'Enter the condition of your phone',
+};
+
+export const adPostSubmittedMessage = {
+  uz: "📪 So`rovingiz tekshirish uchun adminga jo`natildi!\n\nE'lon 24-48 soat ichida kanalda chiqariladi.",
+  ru: '📪 Ваш запрос отправлен администратору на проверку!\n\nОбъявление будет опубликовано в канале в течение 24-48 часов.',
+  en: '📪 Your request has been sent to the admin for review!\n\nThe ad will be posted on the channel within 24-48 hours.',
 };

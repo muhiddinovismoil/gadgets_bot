@@ -34,9 +34,18 @@ export type ContextType = Context &
   SceneContext & {
     reply_to_message_id?: any;
     session: {
+      isSceneChanging?: boolean;
+      postId?: string;
+      currentMediaGroupId?: string;
+      tempGroupImages?: string[];
+      groupTimeout?: NodeJS.Timeout;
+      singleTimeout?: NodeJS.Timeout;
+      hasEnteredNextScene?: boolean;
+      isEditing?: boolean;
       lang: string;
       images: string[];
       lastMessage: any;
+      lastConfirmationMessage: any;
       iphoneInfo: PhoneInfoI;
       androidInfo: PhoneInfoI;
       sendToAdmin?: boolean;

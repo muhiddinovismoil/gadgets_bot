@@ -67,23 +67,38 @@ export function buildConditionKeyboard({
 }) {
   const prefix = isPhoneAndroid ? 'android' : 'iphone';
 
-  const buttons = [
+  const uz = [
     [
-      { text: 'A+ (Deyarli yangi)', callback_data: `${prefix}_Aplus` },
-      { text: 'A (Yaxshi holat)', callback_data: `${prefix}_A` },
+      { text: '🌟 Ideal', callback_data: `${prefix}_ideal` },
+      { text: '👍 Yaxshi', callback_data: `${prefix}_yaxshi` },
     ],
     [
-      { text: 'B (O‘rta holat)', callback_data: `${prefix}_B` },
-      { text: 'C (Qoniqarli)', callback_data: `${prefix}_C` },
+      { text: '⚖️ O‘rta', callback_data: `${prefix}_orta` },
+      { text: '⚙️ Faqat qismlar uchun', callback_data: `${prefix}_parts` },
     ],
-    [{ text: '⚙️ Faqat qismlar uchun', callback_data: `${prefix}_parts` }],
   ];
 
-  const langs: Record<Lang, any> = {
-    uz: { inline_keyboard: buttons },
-    ru: { inline_keyboard: buttons },
-    en: { inline_keyboard: buttons },
-  };
+  const ru = [
+    [
+      { text: '🌟 Идеальное', callback_data: `${prefix}_ideal` },
+      { text: '👍 Хорошее', callback_data: `${prefix}_yaxshi` },
+    ],
+    [
+      { text: '⚖️ Среднее', callback_data: `${prefix}_orta` },
+      { text: '⚙️ Только на запчасти', callback_data: `${prefix}_parts` },
+    ],
+  ];
 
-  return langs;
+  const en = [
+    [
+      { text: '🌟 Ideal', callback_data: `${prefix}_ideal` },
+      { text: '👍 Good', callback_data: `${prefix}_yaxshi` },
+    ],
+    [
+      { text: '⚖️ Average', callback_data: `${prefix}_orta` },
+      { text: '⚙️ For parts only', callback_data: `${prefix}_parts` },
+    ],
+  ];
+
+  return { uz, ru, en };
 }

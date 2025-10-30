@@ -7,15 +7,27 @@ import { PrismaService } from '@/prisma';
 
 @Scene('AndroidDevice')
 export class AndroidPostScene {
-  constructor() {}
-
   @SceneEnter()
   async onEnter(ctx: common.ContextType) {
-    const lang = ctx?.session?.lang;
-    await ctx.editMessageText(common.WhichAndroidPhoneBrandMsg[lang], {
-      ...common.getPhoneBrandKeyboard(lang),
-    });
+    const lang = ctx.session?.lang || 'uz';
+
+    try {
+      if (ctx.session.isEditing) {
+        await ctx.editMessageText(common.askPleaseFillCorrectly[lang]);
+        await ctx.reply(common.WhichAndroidPhoneBrandMsg[lang], {
+          ...common.getPhoneBrandKeyboard(lang),
+        });
+        return;
+      } else {
+        await ctx.editMessageText(common.WhichAndroidPhoneBrandMsg[lang], {
+          ...common.getPhoneBrandKeyboard(lang),
+        });
+      }
+    } catch (err) {
+      console.warn('Nimadur xato', err);
+    }
   }
+
   @Action(/^brand_.+/)
   async onBrandSelected(ctx: common.ContextType) {
     const callbackQuery = ctx.callbackQuery as CallbackQuery.DataQuery;
@@ -58,7 +70,6 @@ export class AndroidPostScene {
 
 @Scene('SamsungScene')
 export class SamsungScene {
-  constructor() {}
   @SceneEnter()
   async onEnter(ctx: common.ContextType) {
     const lang = ctx?.session?.lang;
@@ -80,7 +91,6 @@ export class SamsungScene {
 
 @Scene('OppoScene')
 export class OppoScene {
-  constructor() {}
   @SceneEnter()
   async onEnter(ctx: common.ContextType) {
     const lang = ctx?.session?.lang;
@@ -100,7 +110,6 @@ export class OppoScene {
 
 @Scene('RedmiScene')
 export class RedmiScene {
-  constructor() {}
   @SceneEnter()
   async onEnter(ctx: common.ContextType) {
     const lang = ctx?.session?.lang;
@@ -120,7 +129,6 @@ export class RedmiScene {
 
 @Scene('MiScene')
 export class MiScene {
-  constructor() {}
   @SceneEnter()
   async onEnter(ctx: common.ContextType) {
     const lang = ctx?.session?.lang;
@@ -140,7 +148,6 @@ export class MiScene {
 
 @Scene('RealmeScene')
 export class RealmeScene {
-  constructor() {}
   @SceneEnter()
   async onEnter(ctx: common.ContextType) {
     const lang = ctx?.session?.lang;
@@ -160,7 +167,6 @@ export class RealmeScene {
 
 @Scene('InfinixScene')
 export class InfinixScene {
-  constructor() {}
   @SceneEnter()
   async onEnter(ctx: common.ContextType) {
     const lang = ctx?.session?.lang;
@@ -182,7 +188,6 @@ export class InfinixScene {
 
 @Scene('PocoScene')
 export class PocoScene {
-  constructor() {}
   @SceneEnter()
   async onEnter(ctx: common.ContextType) {
     const lang = ctx?.session?.lang;
@@ -202,7 +207,6 @@ export class PocoScene {
 
 @Scene('TecnoScene')
 export class TecnoScene {
-  constructor() {}
   @SceneEnter()
   async onEnter(ctx: common.ContextType) {
     const lang = ctx?.session?.lang;
@@ -240,7 +244,6 @@ export class AskAndroidMemoryScene {
 }
 @Scene('AskisDeliveryValidForAndroid')
 export class AskisDeliveryValidForAndroid {
-  constructor() {}
   @SceneEnter()
   async onEnter(ctx: common.ContextType) {
     ctx.reply(common.askIsDeliveryValid[ctx.session.lang], {
@@ -260,7 +263,6 @@ export class AskisDeliveryValidForAndroid {
 }
 @Scene('AskAndroidPrice')
 export class AskAndroidPrice {
-  constructor() {}
   @SceneEnter()
   async onEnter(ctx: common.ContextType) {
     ctx.editMessageText(common.askPricePhoneMsg[ctx.session.lang]);
@@ -278,7 +280,6 @@ export class AskAndroidPrice {
 }
 @Scene('AskIsExchangeValidOnAndroid')
 export class AskIsExchangeValidOnAndroid {
-  constructor() {}
   @SceneEnter()
   async onEnter(ctx: common.ContextType) {
     ctx.reply(common.askExchange[ctx.session.lang], {
@@ -299,7 +300,6 @@ export class AskIsExchangeValidOnAndroid {
 }
 @Scene('AskAndroidDocumentsValid')
 export class AskAndroidDocumentsValid {
-  constructor() {}
   @SceneEnter()
   async onEnter(ctx: common.ContextType) {
     await ctx.editMessageText(common.askIsDocumentsValid[ctx.session.lang], {
@@ -321,7 +321,6 @@ export class AskAndroidDocumentsValid {
 }
 @Scene('AskAndroidBattaryCondition')
 export class AskAndroidBattaryCondition {
-  constructor() {}
   @SceneEnter()
   async onEnter(ctx: common.ContextType) {
     await ctx.editMessageText(common.askConditionOfBattary[ctx.session.lang], {
@@ -346,9 +345,9 @@ export class AskAndroidBattaryCondition {
     await ctx.scene.enter('AskAndroidRegion');
   }
 }
+
 @Scene('AskAndroidRegion')
 export class AskAndroidRegion {
-  constructor() {}
   @SceneEnter()
   async onEnter(ctx: common.ContextType) {
     await ctx.editMessageText(common.askRegionOfPhone[ctx.session.lang]);
@@ -357,17 +356,57 @@ export class AskAndroidRegion {
   async onText(ctx: common.ContextType) {
     const message = (ctx.update as any).message.text;
     ctx.session.androidInfo.region = message;
-    await ctx.scene.enter('AskAndroidOtherInfos');
+    await ctx.scene.enter('AskAndroidPhoneCondition');
+  }
+}
+@Scene('AskAndroidPhoneCondition')
+export class AskAndroidPhoneCondition {
+  @SceneEnter()
+  async onEnter(ctx: common.ContextType) {
+    const s = ctx.session;
+    s.isSceneChanging = false;
+    s.currentMediaGroupId = undefined;
+    s.tempGroupImages = [];
+    clearTimeout(s.groupTimeout);
+    clearTimeout(s.singleTimeout);
+    await ctx.reply(common.askConditionOfPhone[ctx.session.lang], {
+      reply_markup: {
+        inline_keyboard: common.buildConditionKeyboard({
+          isPhoneAndroid: true,
+        })[ctx.session.lang],
+      },
+    });
+  }
+  @Action('android_ideal')
+  async onIdealAction(@Ctx() ctx: common.ContextType) {
+    ctx.session.androidInfo.condition = 'Ideal';
+    ctx.scene.enter('AskAndroidOtherInfos');
+  }
+
+  @Action('android_yaxshi')
+  async onGoodAction(@Ctx() ctx: common.ContextType) {
+    ctx.session.androidInfo.condition = 'Yaxshi';
+    ctx.scene.enter('AskAndroidOtherInfos');
+  }
+
+  @Action('android_orta')
+  async onAverageAction(@Ctx() ctx: common.ContextType) {
+    ctx.session.androidInfo.condition = "O'rta";
+    ctx.scene.enter('AskAndroidOtherInfos');
+  }
+
+  @Action('android_parts')
+  async onPartsAction(@Ctx() ctx: common.ContextType) {
+    ctx.session.androidInfo.condition = 'Extiyot qism';
+    ctx.scene.enter('AskAndroidOtherInfos');
   }
 }
 
 @Scene('AskAndroidOtherInfos')
 export class AskAndroidOtherInfos {
-  constructor() {}
-
   @SceneEnter()
   async onEnter(ctx: common.ContextType) {
-    await ctx.reply(common.askOtherInfoAboutPhone[ctx.session.lang]);
+    await ctx.editMessageText(common.askOtherInfoAboutPhone[ctx.session.lang]);
   }
   @On('text')
   async onText(ctx: common.ContextType) {
@@ -379,8 +418,6 @@ export class AskAndroidOtherInfos {
 
 @Scene('AskAndroidImages')
 export class AskAndroidImages {
-  constructor(@InjectBot() private readonly telegram: Telegraf) {}
-
   @SceneEnter()
   async onEnter(ctx: common.ContextType) {
     await ctx.reply(common.askPhoneImages[ctx.session.lang]);
@@ -390,26 +427,210 @@ export class AskAndroidImages {
 
   @On('message')
   async onMessage(ctx: common.ContextType) {
-    const images = ctx.session.androidInfo.images || [];
+    const session = ctx.session;
 
-    if (ctx.message && 'photo' in ctx.message) {
-      images.push(ctx.message.photo[ctx.message.photo.length - 1].file_id);
+    const androidInfo =
+      session.androidInfo ||
+      (session.androidInfo = { ...common.defaultPhoneInfo });
+    const images = androidInfo.images;
 
-      if (images.length > 6) {
-        images.pop();
-        await ctx.reply(common.alertSendingImageLimitMsg[ctx.session.lang]);
-      } else {
-        ctx.session.androidInfo.images = images;
+    if (
+      !ctx.message ||
+      !('photo' in ctx.message) ||
+      !Array.isArray(ctx.message.photo) ||
+      ctx.message.photo.length === 0
+    ) {
+      await ctx.reply(common.requestImageMessage[session.lang]);
+      return;
+    }
+
+    const photos = ctx.message.photo;
+    const lastPhoto = photos[photos.length - 1];
+    if (!lastPhoto?.file_id) {
+      await ctx.reply(common.requestImageMessage[session.lang]);
+      return;
+    }
+
+    const mediaGroupId = (ctx.message as any).media_group_id;
+
+    if (session.isSceneChanging) return;
+
+    if (mediaGroupId) {
+      if (session.currentMediaGroupId !== mediaGroupId) {
+        session.currentMediaGroupId = mediaGroupId;
+        session.tempGroupImages = [];
       }
-      if (!ctx.session.sendToAdmin) {
-        ctx.session.sendToAdmin = true;
-        await this.sendPostToAdmin(ctx);
-      }
+
+      (session.tempGroupImages ??= []).push(lastPhoto.file_id);
+
+      clearTimeout(session.groupTimeout);
+      session.groupTimeout = setTimeout(async () => {
+        images.push(...(session.tempGroupImages ?? []));
+        delete session.tempGroupImages;
+        delete session.currentMediaGroupId;
+
+        if (images.length > 6) {
+          images.splice(6);
+          await ctx.reply(common.alertSendingImageLimitMsg[session.lang]);
+        }
+
+        androidInfo.images = images;
+
+        session.isSceneChanging = true;
+        await ctx.scene.enter('AskAndroidPhonePostAcceptation');
+      }, 1000);
 
       return;
     }
 
-    await ctx.reply(common.requestImageMessage[ctx.session.lang]);
+    images.push(lastPhoto.file_id);
+
+    if (images.length > 6) {
+      images.splice(6);
+      await ctx.reply(common.alertSendingImageLimitMsg[session.lang]);
+    }
+
+    androidInfo.images = images;
+
+    clearTimeout(session.singleTimeout);
+    session.singleTimeout = setTimeout(async () => {
+      session.isSceneChanging = true;
+      await ctx.scene.enter('AskAndroidPhonePostAcceptation');
+    }, 1000);
+  }
+}
+
+@Scene('AskAndroidPhonePostAcceptation')
+export class AskAndroidPhonePostAcceptation {
+  constructor(
+    @InjectBot() private readonly telegram: Telegraf,
+    private readonly prisma: PrismaService,
+  ) {}
+
+  @SceneEnter()
+  async onEnter(ctx: common.ContextType) {
+    await this.sendPostToUser(ctx);
+    const confirmationMessage = await ctx.reply(
+      common.askingConfirmation[ctx.session.lang],
+      {
+        reply_markup: common.acceptEditKeyboard[ctx.session.lang],
+      },
+    );
+    ctx.session.lastConfirmationMessage = confirmationMessage.message_id;
+  }
+
+  @Action('accept')
+  async onActionAccept(@Ctx() ctx: common.ContextType) {
+    if (!ctx.session.sendToAdmin) {
+      ctx.session.sendToAdmin = true;
+      const { phone_number, price, ...restData } = ctx.session.androidInfo;
+      const data = await this.prisma.phones.create({
+        data: {
+          ...restData,
+          phoneNumber: ctx.session.androidInfo.phone_number,
+          price: Number(ctx.session.androidInfo.price),
+        },
+      });
+      ctx.session.postId = data.id;
+    }
+
+    const lastMessageId = ctx.session.lastMessage?.message_id;
+    const chatId = ctx.chat?.id;
+
+    if (chatId && lastMessageId) {
+      try {
+        await ctx.telegram.deleteMessage(chatId, lastMessageId);
+      } catch (err) {
+        console.warn("Postni o'chirishda xatolik:", err);
+      }
+    }
+
+    const confirmationMessageId = ctx.session.lastConfirmationMessage;
+
+    if (chatId && confirmationMessageId) {
+      try {
+        await ctx.telegram.editMessageText(
+          chatId,
+          confirmationMessageId,
+          undefined,
+          common.adPostSubmittedMessage[ctx.session.lang],
+          {
+            reply_markup: { inline_keyboard: [] },
+          },
+        );
+        await ctx.answerCbQuery();
+      } catch (err) {
+        console.warn('Confirmation messageni edit qilishda xatolik:', err);
+        await ctx.answerCbQuery();
+      }
+    } else {
+      await ctx.answerCbQuery();
+    }
+
+    await this.sendPostToAdmin(ctx);
+  }
+
+  @Action('edit')
+  async onActionEdit(@Ctx() ctx: common.ContextType) {
+    const lastMessageId = ctx.session.lastMessage?.message_id;
+    const confirmationMessageId = ctx.session.lastConfirmationMessage;
+    const chatId = ctx.chat?.id;
+
+    ctx.session.androidInfo = common.defaultPhoneInfo;
+
+    if (chatId) {
+      if (lastMessageId) {
+        try {
+          await ctx.telegram.deleteMessage(chatId, lastMessageId);
+        } catch (err) {
+          console.warn("Postni o'chirishda xatolik:", err);
+        }
+      }
+    }
+
+    ctx.session.lastMessage = undefined;
+    ctx.session.lastConfirmationMessage = undefined;
+    ctx.session.isEditing = true;
+    ctx.session.sendToAdmin = false;
+
+    await ctx.answerCbQuery();
+    await ctx.scene.enter('AndroidDevice');
+  }
+  async sendPostToUser(ctx: common.ContextType) {
+    const androidInfo = ctx.session.androidInfo;
+    if (!androidInfo) {
+      return await ctx.reply(
+        common.thereIsNoAnyInfoAboutPhone[ctx.session.lang],
+      );
+    }
+
+    const images = androidInfo.images || [];
+    const phoneInfo = androidTemplate(androidInfo);
+
+    if (!images.length) {
+      return await ctx.reply(
+        common.askSendingAtLeastOneImage[ctx.session.lang],
+      );
+    }
+    if (!phoneInfo) {
+      return await ctx.reply(
+        common.thereIsNoAnyInfoAboutPhone[ctx.session.lang],
+      );
+    }
+
+    const media: InputMediaPhoto[] = images.map((file_id, index) => ({
+      type: 'photo' as const,
+      media: file_id,
+      caption: index === 0 ? phoneInfo : undefined,
+      parse_mode: 'HTML',
+    }));
+
+    if (!ctx.chat || !ctx.chat.id) return;
+    const sentMessages = await ctx.telegram.sendMediaGroup(ctx.chat.id, media);
+
+    ctx.session.lastMessage = sentMessages[0];
+
+    ctx.session.sendToAdmin = false;
   }
 
   async sendPostToAdmin(ctx: common.ContextType) {
@@ -436,9 +657,38 @@ export class AskAndroidImages {
       parse_mode: 'HTML',
     }));
 
-    await this.telegram.telegram.sendMediaGroup(ADMIN_CHANNEL_ID, media);
+    const sentMedia = await ctx.telegram.sendMediaGroup(
+      ADMIN_CHANNEL_ID,
+      media,
+    );
+    const firstMediaMessageId = sentMedia[0].message_id;
 
-    ctx.session.androidInfo.images = [];
+    const confirmationMsg = await ctx.telegram.sendMessage(
+      ADMIN_CHANNEL_ID,
+      'Postni tasdiqlaysizmi?',
+      {
+        reply_markup: common.approvalKeyboard(
+          ctx.session.postId as string,
+          firstMediaMessageId,
+          0,
+        ).uz,
+      },
+    );
+
+    await ctx.telegram.editMessageReplyMarkup(
+      ADMIN_CHANNEL_ID,
+      confirmationMsg.message_id,
+      undefined,
+      common.approvalKeyboard(
+        ctx.session.postId as string,
+        firstMediaMessageId,
+        confirmationMsg.message_id,
+      ).uz,
+    );
+
+    const chatId = ctx.chat?.id;
+    if (!chatId) return;
+
     ctx.session.sendToAdmin = false;
     ctx.scene.leave();
   }

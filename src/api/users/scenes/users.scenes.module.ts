@@ -34,6 +34,8 @@ import * as iPhone from './iphone.scene';
     Android.AskAndroidDocumentsValid,
     Android.AskAndroidOtherInfos,
     Android.AskAndroidImages,
+    Android.AskAndroidPhoneCondition,
+    Android.AskAndroidPhonePostAcceptation,
     // ---------------------------------------------------------------------
 
     // ---------------------------------------------------------------------

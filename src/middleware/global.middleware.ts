@@ -44,6 +44,12 @@ export class GlobalUpdate {
     this.bot.use(async (ctx: common.ContextType, next) => {
       try {
         if (ctx.callbackQuery) {
+          const data =
+            'data' in ctx.callbackQuery ? ctx.callbackQuery.data : '';
+          if (data?.startsWith('approve_') || data?.startsWith('reject_')) {
+            return next();
+          }
+
           if (!ctx.session || !ctx.session.lang) {
             await ctx.editMessageText(
               "Iltimos start buyrug'ini yozing: /start\nPlease send start command: /start\nПожалуйста, отправьте команду /start",
