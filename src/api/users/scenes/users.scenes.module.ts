@@ -50,6 +50,8 @@ import * as iPhone from './iphone.scene';
     iPhone.AskIsExchangeValid,
     iPhone.AskisDeliveryValidForIphone,
     iPhone.AskiPhoneOtherInfo,
+    iPhone.AskiPhoneCondition,
+    iPhone.AskiPhonePostAcceptation,
   ],
 })
 export class UserSceneModule {}

@@ -9,6 +9,7 @@ export class iPhonePostScene {
   constructor() {}
   @SceneEnter()
   async onEnter(ctx: common.ContextType) {
+    ctx.session.iphoneInfo = common.defaultPhoneInfo;
     await ctx.editMessageText(common.askModelPhoneMsg[ctx.session.lang]);
   }
   @On('text')
@@ -90,12 +91,12 @@ export class AskIsExchangeValid {
   @Action('yesExchange')
   async onYesExchange(ctx: common.ContextType) {
     ctx.session.iphoneInfo.exchange = true;
-    await ctx.scene.enter('AskiPhoneDocumentsValid');
+    await ctx.scene.enter('AskiPhoneCondition');
   }
   @Action('noExchange')
   async onNoExchange(ctx: common.ContextType) {
     ctx.session.iphoneInfo.exchange = false;
-    await ctx.scene.enter('AskiPhoneDocumentsValid');
+    await ctx.scene.enter('AskiPhoneCondition');
   }
 }
 @Scene('AskiPhoneCondition')
@@ -110,7 +111,7 @@ export class AskiPhoneCondition {
     s.tempGroupImages = [];
     clearTimeout(s.groupTimeout);
     clearTimeout(s.singleTimeout);
-    await ctx.reply(common.askConditionOfPhone[ctx.session.lang], {
+    await ctx.editMessageText(common.askConditionOfPhone[ctx.session.lang], {
       reply_markup: {
         inline_keyboard: common.buildConditionKeyboard({
           isPhoneAndroid: false,
